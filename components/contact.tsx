@@ -65,7 +65,7 @@ export function Contact() {
   return (
     <section
       id="kontakt"
-      className="mx-auto max-w-7xl scroll-mt-28 px-3 py-16 sm:px-4 lg:px-6 lg:py-24"
+      className="mx-auto max-w-7xl scroll-mt-28 px-3 py-12 sm:px-4 sm:py-16 lg:px-6 lg:py-24"
     >
       <SectionHeading
         stitek="Kontakt"

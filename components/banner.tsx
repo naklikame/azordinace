@@ -7,7 +7,7 @@ const telHref = `tel:${klinika.telefon.replace(/\s/g, "")}`;
 export function Banner() {
   return (
     <section className="px-3 py-4 sm:px-4 lg:px-6 lg:py-6">
-      <div className="reveal relative mx-auto flex min-h-[24rem] max-w-7xl overflow-hidden rounded-4xl lg:min-h-[26rem]">
+      <div className="reveal relative mx-auto flex min-h-[19rem] max-w-7xl overflow-hidden rounded-4xl sm:min-h-[24rem] lg:min-h-[26rem]">
         <Foto
           src={fotky.banner}
           alt=""
@@ -23,7 +23,7 @@ export function Banner() {
           className="absolute inset-0 bg-gradient-to-t from-brand-900 via-brand-900/80 to-brand-900/25 lg:bg-gradient-to-l lg:from-brand-900 lg:via-brand-900/85 lg:to-transparent"
         />
 
-        <div className="relative mt-auto w-full p-8 text-white sm:p-12 lg:ml-auto lg:mt-0 lg:flex lg:max-w-[36rem] lg:flex-col lg:justify-center lg:p-16">
+        <div className="relative mt-auto w-full p-6 text-white sm:p-12 lg:ml-auto lg:mt-0 lg:flex lg:max-w-[36rem] lg:flex-col lg:justify-center lg:p-16">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-200">
             {banner.stitek}
           </span>

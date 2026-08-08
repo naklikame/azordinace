@@ -6,7 +6,7 @@ export function Services() {
   return (
     <section
       id="sluzby"
-      className="mx-auto max-w-7xl scroll-mt-28 px-3 py-16 sm:px-4 lg:px-6 lg:py-24"
+      className="mx-auto max-w-7xl scroll-mt-28 px-3 py-12 sm:px-4 sm:py-16 lg:px-6 lg:py-24"
     >
       <SectionHeading
         stitek="Naše služby"
@@ -15,11 +15,13 @@ export function Services() {
         popis="Od preventivní prohlídky po korunku. Nikam vás neposíláme, ošetří vás stejný tým, který vás už zná."
       />
 
-      <ul className="kaskada mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="kaskada mt-12 -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3"
+        tabIndex={0}
+        aria-label="Přehled služeb, na telefonu posuvný do stran">
         {sluzby.map((sluzba, i) => (
           <li
             key={sluzba.id}
-            className="zdvih group relative flex h-full flex-col overflow-hidden rounded-4xl border border-sand-200 bg-white p-8 hover:border-brand-300"
+            className="zdvih group relative flex flex-col overflow-hidden rounded-4xl border border-sand-200 bg-white p-7 hover:border-brand-300 sm:p-8 w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none"
           >
             {/* Pořadové číslo v duchu velkých lehkých číslic ze sekce výše */}
             <span
@@ -52,7 +54,7 @@ export function Services() {
         ))}
 
         {/* Barevná karta uzavírá mřížku a odvádí na objednávku */}
-        <li className="zdvih relative flex flex-col justify-between overflow-hidden rounded-4xl bg-brand-700 p-8 text-white sm:col-span-2 lg:col-span-1">
+        <li className="zdvih relative flex flex-col justify-between overflow-hidden rounded-4xl bg-brand-700 p-7 text-white sm:col-span-2 sm:p-8 lg:col-span-1 w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none">
           <div
             aria-hidden="true"
             className="zar pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-brand-500/40 blur-3xl"

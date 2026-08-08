@@ -14,7 +14,7 @@ const faqSchema = {
 
 export function Faq() {
   return (
-    <section className="mx-auto max-w-7xl px-3 py-16 sm:px-4 lg:px-6 lg:py-24">
+    <section className="mx-auto max-w-7xl px-3 py-12 sm:px-4 sm:py-16 lg:px-6 lg:py-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

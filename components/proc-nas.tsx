@@ -11,10 +11,10 @@ const poziceStitku = [
 
 export function ProcNas() {
   return (
-    <section className="px-3 py-16 sm:px-4 lg:px-6 lg:py-24">
+    <section className="px-3 py-12 sm:px-4 sm:py-16 lg:px-6 lg:py-24">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:gap-12">
         {/* ── Panel s fotkou ── */}
-        <div className="relative isolate flex min-h-[32rem] flex-col overflow-hidden rounded-4xl bg-brand-700 px-7 pt-10 text-white sm:px-10 lg:min-h-[38rem] lg:pb-8">
+        <div className="relative isolate flex min-h-[26rem] flex-col overflow-hidden rounded-4xl bg-brand-700 px-6 pt-9 sm:min-h-[32rem] text-white sm:px-10 lg:min-h-[38rem] lg:pb-8">
           <div
             aria-hidden="true"
             className="zar pointer-events-none absolute -left-20 -top-20 -z-10 size-80 rounded-full bg-brand-500/30 blur-3xl"

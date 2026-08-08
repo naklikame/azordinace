@@ -111,6 +111,14 @@
   }
 }
 
+/* Posuvník u karuselů schováváme, afordanci nese vykukující další karta. */
+@utility bez-posuvniku {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer components {
   /*
    * Pohyb je celý v CSS, bez JavaScriptu a bez knihoven. Stojí na dvou

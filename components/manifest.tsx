@@ -90,7 +90,7 @@ function Avatary() {
 
 export function Manifest() {
   return (
-    <section className="relative isolate overflow-hidden bg-brand-50 px-5 py-24 lg:py-32">
+    <section className="relative isolate overflow-hidden bg-brand-50 px-5 py-16 sm:py-24 lg:py-32">
       <Vzor />
 
       <div className="reveal mx-auto max-w-4xl text-center">

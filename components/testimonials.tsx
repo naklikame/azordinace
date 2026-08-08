@@ -5,9 +5,9 @@ export function Testimonials() {
   return (
     <section
       id="reference"
-      className="scroll-mt-28 px-3 py-16 sm:px-4 lg:px-6 lg:py-24"
+      className="scroll-mt-28 px-3 py-12 sm:px-4 sm:py-16 lg:px-6 lg:py-24"
     >
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-4xl bg-brand-800 px-7 py-14 sm:px-10 lg:px-14 lg:py-20">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-4xl bg-brand-800 px-6 py-12 sm:px-10 sm:py-14 lg:px-14 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <SectionHeading
@@ -25,11 +25,15 @@ export function Testimonials() {
             </a>
           </div>
 
-          <ul className="kaskada grid gap-4 sm:grid-cols-2">
+          <ul
+            className="kaskada -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-2"
+            tabIndex={0}
+            aria-label="Hodnocení pacientů, na telefonu posuvná do stran"
+          >
             {reference.map((r) => (
               <li
                 key={r.jmeno}
-                className="zdvih rounded-4xl bg-white/[0.07] p-7 ring-1 ring-white/10 backdrop-blur-sm"
+                className="zdvih rounded-4xl bg-white/[0.07] p-6 ring-1 ring-white/10 backdrop-blur-sm sm:p-7 w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none"
               >
                 <figure>
                   <blockquote className="leading-relaxed text-brand-50">

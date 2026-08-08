@@ -35,7 +35,7 @@ export function Hero() {
 
           <div className="relative grid lg:min-h-[36rem] lg:grid-cols-[40%_60%]">
             {/* ── Levá polovina ── */}
-            <div className="nastup flex flex-col rounded-t-4xl bg-white px-6 py-10 sm:px-9 lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14 xl:px-14">
+            <div className="nastup flex flex-col rounded-t-4xl bg-white px-6 py-9 sm:px-9 sm:py-10 lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14 xl:px-14">
               <p className="mb-6 inline-flex max-w-xs items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-4 py-1.5 text-xs font-semibold text-brand-800 backdrop-blur-sm">
                 <span
                   aria-hidden="true"
@@ -79,7 +79,7 @@ export function Hero() {
             </div>
 
             {/* ── Pravá polovina ── */}
-            <div className="relative flex flex-col rounded-b-4xl bg-brand-700 px-6 py-10 text-white sm:px-9 lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14">
+            <div className="relative flex flex-col rounded-b-4xl bg-brand-700 px-6 py-9 text-white sm:px-9 sm:py-10 lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14">
               <div className="flex items-start justify-between gap-6 lg:justify-end">
                 <address className="not-italic text-sm leading-relaxed text-white lg:hidden">
                   {klinika.adresa.ulice}
@@ -119,7 +119,7 @@ export function Hero() {
                   alt="Lékařka Zubní ordinace AZ"
                   napoveda="Portrét lékařky, na výšku 600 × 720 px"
                   pozice="center top"
-                  className="mx-auto aspect-[5/6] w-full max-w-xs rounded-4xl ring-1 ring-white/40"
+                  className="mx-auto aspect-[4/5] w-full max-w-[15rem] rounded-4xl ring-1 ring-white/40 sm:aspect-[5/6] sm:max-w-xs"
                   sizes="(min-width: 640px) 20rem, 100vw"
                 />
                 <ul className="mt-5 flex flex-wrap justify-center gap-2">

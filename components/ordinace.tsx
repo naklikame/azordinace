@@ -8,7 +8,7 @@ export function Ordinace() {
   return (
     <section
       id="ordinace"
-      className="mx-auto max-w-7xl scroll-mt-28 px-3 py-16 sm:px-4 lg:px-6 lg:py-24"
+      className="mx-auto max-w-7xl scroll-mt-28 px-3 py-12 sm:px-4 sm:py-16 lg:px-6 lg:py-24"
     >
       <SectionHeading
         stitek="Naše ordinace"
@@ -17,7 +17,11 @@ export function Ordinace() {
         popis="Ošetřujeme ve dvou ordinacích. U každé najdete, kdo v ní pracuje a čemu se věnuje, abyste věděli, kdo se o vás postará."
       />
 
-      <ul className="kaskada mt-12 grid gap-4 lg:grid-cols-2">
+      <ul
+        className="kaskada mt-12 -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-1 lg:grid-cols-2"
+        tabIndex={0}
+        aria-label="Naše ordinace, na telefonu posuvné do stran"
+      >
         {ordinace.map((o) => {
           const lekarka = clenTymu(o.lekarId);
           const sestra = clenTymu(o.sestraId);
@@ -26,10 +30,10 @@ export function Ordinace() {
             .filter((s) => s !== undefined);
 
           return (
-            <li key={o.id}>
+            <li key={o.id} className="w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none">
               <Link
                 href={`/ordinace/${o.id}`}
-                className="zdvih group flex h-full flex-col rounded-4xl border border-sand-200 bg-white p-8 hover:border-brand-300 sm:p-10"
+                className="zdvih group flex h-full flex-col rounded-4xl border border-sand-200 bg-white p-7 hover:border-brand-300 sm:p-10"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>

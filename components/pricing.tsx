@@ -8,7 +8,7 @@ export function Pricing() {
   return (
     <section
       id="cenik"
-      className="mx-auto max-w-7xl scroll-mt-28 px-3 py-16 sm:px-4 lg:px-6 lg:py-24"
+      className="mx-auto max-w-7xl scroll-mt-28 px-3 py-12 sm:px-4 sm:py-16 lg:px-6 lg:py-24"
     >
       <SectionHeading
         stitek="Ceník"
@@ -17,13 +17,17 @@ export function Pricing() {
         popis="Ceny nejčastějších výkonů. Konkrétní částku vám řekneme dřív, než se pustíme do práce. Kompletní ceník najdete v ordinaci."
       />
 
-      <div className="kaskada mt-12 grid gap-4 lg:grid-cols-2">
+      <div
+        className="kaskada mt-12 -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-1 lg:grid-cols-2"
+        tabIndex={0}
+        aria-label="Ceník po skupinách, na telefonu posuvný do stran"
+      >
         {cenik.map((skupina, i) => (
           <div
             key={skupina.skupina}
-            className="zdvih overflow-hidden rounded-4xl border border-sand-200 bg-white"
+            className="zdvih overflow-hidden rounded-4xl border border-sand-200 bg-white w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none"
           >
-            <div className="flex items-center justify-between gap-4 border-b border-sand-200 bg-brand-50 px-8 py-6">
+            <div className="flex items-center justify-between gap-4 border-b border-sand-200 bg-brand-50 px-6 py-5 sm:px-8 sm:py-6">
               <h3 className="font-display text-lg font-extrabold tracking-tight text-ink">
                 {skupina.skupina}
               </h3>
@@ -48,7 +52,7 @@ export function Pricing() {
                   <tr key={polozka.vykon} className="transition-colors hover:bg-brand-50/60">
                     <th
                       scope="row"
-                      className="px-8 py-4 text-left font-normal text-ink-soft"
+                      className="px-6 py-3.5 text-left font-normal text-ink-soft sm:px-8 sm:py-4"
                     >
                       {polozka.vykon}
                       {polozka.poznamka && (
@@ -57,7 +61,7 @@ export function Pricing() {
                         </span>
                       )}
                     </th>
-                    <td className="whitespace-nowrap px-8 py-4 text-right font-semibold tabular-nums text-ink">
+                    <td className="whitespace-nowrap px-6 py-3.5 text-right font-semibold tabular-nums text-ink sm:px-8 sm:py-4">
                       {polozka.cena}
                     </td>
                   </tr>
