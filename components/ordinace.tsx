@@ -17,8 +17,13 @@ export function Ordinace() {
         popis="Ošetřujeme ve dvou ordinacích. U každé najdete, kdo v ní pracuje a čemu se věnuje, abyste věděli, kdo se o vás postará."
       />
 
+      {/*
+        Podmřížka sváže výšky odpovídajících pásem napříč kartami. Bez ní se
+        karty rozjedou, protože texty mají různou délku: jedno jméno se zalomí
+        na dva řádky, druhé ne, a jedna ordinace má o štítek zaměření víc.
+      */}
       <ul
-        className="kaskada mt-12 -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-1 lg:grid-cols-2"
+        className="kaskada mt-12 -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:grid-cols-1 sm:grid-rows-[auto_1fr_auto_auto_auto] sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-2"
         tabIndex={0}
         aria-label="Naše ordinace, na telefonu posuvné do stran"
       >
@@ -30,10 +35,13 @@ export function Ordinace() {
             .filter((s) => s !== undefined);
 
           return (
-            <li key={o.id} className="w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none">
+            <li
+              key={o.id}
+              className="w-[82%] max-w-xs shrink-0 snap-start sm:row-span-5 sm:grid sm:w-auto sm:max-w-none sm:grid-rows-subgrid"
+            >
               <Link
                 href={`/ordinace/${o.id}`}
-                className="zdvih group flex h-full flex-col rounded-4xl border border-sand-200 bg-white p-7 hover:border-brand-300 sm:p-10"
+                className="zdvih group flex h-full flex-col rounded-4xl border border-sand-200 bg-white p-7 hover:border-brand-300 sm:row-span-5 sm:grid sm:grid-rows-subgrid sm:p-10"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -56,7 +64,7 @@ export function Ordinace() {
                 <p className="mt-5 leading-relaxed text-ink-soft">{o.popis}</p>
 
                 {/* Kdo v ordinaci je, kvůli tomu celé dělení vzniklo */}
-                <div className="mt-7 flex flex-wrap gap-3 border-t border-sand-100 pt-6">
+                <div className="mt-7 flex flex-col gap-3 border-t border-sand-100 pt-6">
                   {[lekarka, sestra].map((clen) => (
                     <div key={clen.id} className="flex items-center gap-3">
                       <div className="relative">
@@ -100,7 +108,7 @@ export function Ordinace() {
                   ))}
                 </ul>
 
-                <span className="mt-auto inline-flex items-center gap-2 pt-8 font-semibold text-brand-700">
+                <span className="mt-auto inline-flex items-center gap-2 pt-8 font-semibold text-brand-700 sm:mt-0 sm:self-end">
                   Zobrazit ordinaci
                   <SipkaIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
