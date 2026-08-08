@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Zdrojové fotky a archiv originálů. Do veřejného repozitáře nepatří:
+# jsou to nezpracované podklady (část nejspíš licencovaná fotobanka)
+# a web je ke svému sestavení nepotřebuje.
+/podklady

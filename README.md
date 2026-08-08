@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AZ Ordinace — web zubní kliniky
 
-## Getting Started
+Jednostránkový prezentační web postavený na Next.js 16 (App Router) a Tailwindu v4.
 
-First, run the development server:
+## Spuštění
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # vývojový server na http://localhost:3000
+npm run build   # produkční build
+npm run lint    # ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Kde měnit obsah
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Veškerý text a údaje kliniky jsou v jednom souboru — [content/klinika.ts](content/klinika.ts):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Export | Co obsahuje |
+| --- | --- |
+| `klinika` | Název, adresa, telefon, e-mail, otevírací doba, pojišťovny, doprava, souřadnice mapy |
+| `sluzby` | Nabízená ošetření (pohání sekci Služby, výběr ve formuláři i strukturovaná data) |
+| `tym` | Lékaři a hygienistky |
+| `cenik` | Ceník po skupinách |
+| `reference` | Recenze pacientů |
+| `faq` | Časté dotazy (zároveň se generují do FAQ strukturovaných dat) |
+| `navigace` | Položky hlavního menu |
 
-## Learn More
+Barvy a typografii najdete v `@theme` bloku v [app/globals.css](app/globals.css).
 
-To learn more about Next.js, take a look at the following resources:
+## Struktura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/
+  layout.tsx          metadata, JSON-LD (Dentist), fonty
+  page.tsx            složení sekcí
+  actions.ts          server action objednávkového formuláře
+  opengraph-image.tsx generovaný náhled pro sdílení na sítích
+  sitemap.ts robots.ts
+components/           jednotlivé sekce webu
+content/klinika.ts    veškerý obsah
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Než web pustíte do provozu
 
-## Deploy on Vercel
+1. **Přepsat obsah** v `content/klinika.ts` skutečnými údaji kliniky.
+2. **Nastavit doménu** — proměnná `url` v [app/layout.tsx](app/layout.tsx), dále [app/sitemap.ts](app/sitemap.ts) a [app/robots.ts](app/robots.ts).
+3. **Napojit formulář** — v [app/actions.ts](app/actions.ts) je označené místo (`TODO`), kam doplnit odeslání e-mailu recepci nebo zápis do rezervačního systému. Validace je hotová.
+4. **Vyměnit favicon** `app/favicon.ico` za logo kliniky.
+5. **Ověřit souřadnice mapy** v `klinika.mapa` (mapa se načítá z OpenStreetMap, nevyžaduje API klíč).
+6. **Doplnit GDPR** — web sbírá osobní údaje přes formulář, patří sem odkaz na zásady zpracování.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Přístupnost a SEO
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Web prošel kontrolou proti Web Interface Guidelines, WCAG 2.2 a SEO checklistu:
+kontrasty splňují AA, formulář hlásí chyby inline a fokusuje první chybné pole,
+strukturovaná data obsahují `Dentist` i `FAQPage`.

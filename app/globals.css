@@ -1,26 +1,332 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Značková modrá z vizitky ordinace — odstíny 400/500 odpovídají tisku,
+     tmavší kroky jsou dopočítané tak, aby text prošel kontrastem na bílé */
+  --color-brand-50: #f1f9fd;
+  --color-brand-100: #ddf0f9;
+  --color-brand-200: #bce2f2;
+  --color-brand-300: #8ccde7;
+  --color-brand-400: #58aed4;
+  --color-brand-500: #3894bf;
+  --color-brand-600: #2b7ba3;
+  --color-brand-700: #256584;
+  --color-brand-800: #24546d;
+  --color-brand-900: #22475c;
+
+  /* Doplňková magenta z druhé poloviny vizitky — nese hlavní výzvy k akci */
+  --color-accent-50: #fdf2f7;
+  --color-accent-100: #fce7f0;
+  --color-accent-200: #facfe1;
+  --color-accent-300: #f6a6c7;
+  --color-accent-400: #ef70a3;
+  --color-accent-500: #e14582;
+  --color-accent-600: #c62767;
+  --color-accent-700: #a91958;
+  --color-accent-800: #8b1748;
+  --color-accent-900: #75163e;
+
+  /* Neutrály tažené ke značkové modré, ať stránka není bílá */
+  --color-sand-50: #eff6fb;
+  --color-sand-100: #e2eef6;
+  --color-sand-200: #cde0ec;
+  --color-sand-300: #a9c6d8;
+  /* Okraje formulářových prvků — musí mít vůči podkladu aspoň 3:1 (WCAG 1.4.11) */
+  --color-sand-400: #6e8595;
+
+  --color-ink: #11212b;
+  --color-ink-soft: #4a5a66;
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    /* Web je záměrně jen ve světlém režimu — ať to ví i nativní ovládací prvky */
+    color-scheme: light;
+    scroll-behavior: smooth;
+    /* Odsazení kvůli lepivé hlavičce při skoku na kotvu */
+    scroll-padding-top: 5.5rem;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-sand-50);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Odstraní 300ms prodlevu i modrý záblesk při ťuknutí na mobilu */
+  a,
+  button,
+  summary,
+  label,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    /* U animací řízených scrollem je doba trvání bez vlivu, průběh určuje
+       poloha ve výřezu. Musí se proto vypnout celá animace i časová osa. */
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      animation-timeline: auto !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /*
+   * Pohyb je celý v CSS, bez JavaScriptu a bez knihoven. Stojí na dvou
+   * mechanismech: `view()` pro nájezd při scrollu a obyčejná časová
+   * animace pro nástup hero sekce po načtení.
+   */
+
+  /* Nájezd samostatného bloku při vstupu do výřezu */
+  .reveal {
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 4% cover 20%;
+  }
+
+  /* Kaskáda pro mřížky a seznamy: každý další prvek naskočí o kus později */
+  .kaskada > * {
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 4% cover 20%;
+  }
+  .kaskada > *:nth-child(2) { animation-range: entry 7% cover 24%; }
+  .kaskada > *:nth-child(3) { animation-range: entry 10% cover 28%; }
+  .kaskada > *:nth-child(4) { animation-range: entry 13% cover 32%; }
+  .kaskada > *:nth-child(5) { animation-range: entry 15% cover 34%; }
+  .kaskada > *:nth-child(6) { animation-range: entry 17% cover 36%; }
+  .kaskada > *:nth-child(n + 7) { animation-range: entry 19% cover 38%; }
+
+  /* Nástup hero sekce po načtení stránky, shora dolů */
+  .nastup > * {
+    animation: nastup-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .nastup > *:nth-child(1) { animation-delay: 0.05s; }
+  .nastup > *:nth-child(2) { animation-delay: 0.14s; }
+  .nastup > *:nth-child(3) { animation-delay: 0.23s; }
+  .nastup > *:nth-child(4) { animation-delay: 0.32s; }
+  .nastup > *:nth-child(n + 5) { animation-delay: 0.4s; }
+
+  /* Hlavička se s odscrollováním jemně odlepí od stránky */
+  .hlavicka {
+    animation: hlavicka-stin linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 160px;
+  }
+
+  /*
+   * Plovoucí štítky nad fotkami. V klidu se pomalu vznášejí, při najetí myší
+   * se zastaví, nadzvednou a tečka se rozsvítí. Vznášení jede na `translate`,
+   * aby se nepralo s `transform` z hoveru.
+   */
+  .bublina {
+    pointer-events: auto;
+    animation: bublina-plave 7s ease-in-out infinite;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease,
+      background-color 0.35s ease;
+  }
+
+  .bublina:hover {
+    animation-play-state: paused;
+    transform: translateY(-3px) scale(1.04);
+    background-color: #fff;
+    box-shadow: 0 16px 34px -16px rgba(17, 33, 43, 0.55);
+  }
+
+  .bublina-tecka {
+    transition:
+      scale 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.35s ease;
+  }
+
+  .bublina:hover .bublina-tecka {
+    scale: 1.5;
+    background-color: var(--color-accent-600);
+  }
+
+  /* Ornamenty na pozadí se sotva znatelně přelévají, ať nejsou jako obtisk.
+     Natočení nese `rotate` z inline stylu, animace proto sahá jen na posun. */
+  .ornament {
+    animation: ornament-dech ease-in-out infinite;
+  }
+
+  /* Rozostřená záře v barevných panelech se velmi pomalu přelévá */
+  .zar {
+    animation: zar-preliv 22s ease-in-out infinite;
+  }
+
+  /* Karta se při najetí nadzvedne */
+  .zdvih {
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+  .zdvih:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 44px -30px rgba(17, 33, 43, 0.6);
+  }
+
+  /* Tlačítka reagují na stisk */
+  .stisk {
+    transition: transform 0.12s ease;
+  }
+  .stisk:active {
+    transform: scale(0.975);
+  }
+
+  /* Prohlížeče bez podpory scrollových os nechají obsah rovnou viditelný */
+  @supports not (animation-timeline: view()) {
+    .reveal,
+    .kaskada > *,
+    .hlavicka {
+      animation: none;
+    }
+  }
+}
+
+/* Plynulé rozbalení otázek ve FAQ. Bez podpory se prostě rozbalí skokem. */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      content-visibility 0.35s allow-discrete;
+  }
+
+  details[open]::details-content {
+    block-size: auto;
+  }
+}
+
+/*
+ * Posun držíme na vlastnosti `translate`, ne na `transform`. Doběhlá animace
+ * s výplní `both` totiž natrvalo drží svou hodnotu a přebila by `transform`
+ * z hoveru — karta by se pak při najetí nenadzvedla.
+ */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@keyframes nastup-in {
+  from {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+/* Dráha vede i do stran a s drobným náklonem, aby to plulo, ne jezdilo.
+   `rotate` je samostatná vlastnost, takže si s hoverem nepřekáží. */
+@keyframes bublina-plave {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  25% {
+    translate: 4px -8px;
+    rotate: 0.7deg;
+  }
+  50% {
+    translate: 0 -13px;
+    rotate: 0deg;
+  }
+  75% {
+    translate: -4px -7px;
+    rotate: -0.7deg;
+  }
+}
+
+@keyframes ornament-dech {
+  0%,
+  100% {
+    translate: 0 0;
+    opacity: 1;
+  }
+  50% {
+    translate: -2% 3%;
+    opacity: 0.72;
+  }
+}
+
+@keyframes zar-preliv {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+    opacity: 1;
+  }
+  50% {
+    translate: 5% -4%;
+    scale: 1.15;
+    opacity: 0.75;
+  }
+}
+
+@keyframes hlavicka-stin {
+  from {
+    box-shadow: 0 10px 40px -34px rgba(17, 33, 43, 0.3);
+  }
+  to {
+    box-shadow: 0 14px 36px -20px rgba(17, 33, 43, 0.45);
+  }
 }
