@@ -35,7 +35,7 @@ export function Hero() {
 
           <div className="relative grid lg:min-h-[36rem] lg:grid-cols-[40%_60%]">
             {/* ── Levá polovina ── */}
-            <div className="nastup flex flex-col rounded-t-4xl bg-white px-6 py-9 sm:px-9 sm:py-10 lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14 xl:px-14">
+            <div className="nastup flex flex-col rounded-4xl bg-white px-6 py-9 sm:px-9 sm:py-10 lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14 xl:px-14">
               <p className="mb-6 inline-flex max-w-xs items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-4 py-1.5 text-xs font-semibold text-brand-800 backdrop-blur-sm">
                 <span
                   aria-hidden="true"
@@ -79,7 +79,9 @@ export function Hero() {
             </div>
 
             {/* ── Pravá polovina ── */}
-            <div className="relative flex flex-col rounded-b-4xl bg-brand-700 px-6 py-9 text-white sm:px-9 sm:py-10 lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14">
+            {/* Na telefonu zůstává jen nadpis a výzvy k akci, ať se návštěvník
+                dostane rovnou k obsahu a nemusí projíždět celou fotku. */}
+            <div className="relative hidden flex-col rounded-b-4xl bg-brand-700 px-6 py-9 text-white sm:px-9 sm:py-10 lg:flex lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14">
               <div className="flex items-start justify-between gap-6 lg:justify-end">
                 <address className="not-italic text-sm leading-relaxed text-white lg:hidden">
                   {klinika.adresa.ulice}

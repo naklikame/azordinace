@@ -77,7 +77,7 @@ export const fotky = {
 /** Obsah hero sekce — velký nadpis se láme přesně podle těchto řádků. */
 export const hero = {
   stitekNahore: "Přijímáme nové pacienty, včetně dětí a seniorů",
-  nadpisRadky: ["Zubař, kterého", "se nebojíte"],
+  nadpisRadky: ["Moderní péče", "o vaše zuby"],
   perex:
     "Pečujeme o dospělé i děti na Smíchově. Vysvětlíme, co vás čeká, a nikam nespěcháme.",
   cta: "Objednat se",

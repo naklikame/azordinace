@@ -39,35 +39,28 @@ export function Pricing() {
               </span>
             </div>
 
-            <table className="w-full">
-              <caption className="sr-only">Ceník: {skupina.skupina}</caption>
-              <thead className="sr-only">
-                <tr>
-                  <th scope="col">Výkon</th>
-                  <th scope="col">Cena</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-sand-100">
-                {skupina.polozky.map((polozka) => (
-                  <tr key={polozka.vykon} className="transition-colors hover:bg-brand-50/60">
-                    <th
-                      scope="row"
-                      className="px-6 py-3.5 text-left font-normal text-ink-soft sm:px-8 sm:py-4"
-                    >
-                      {polozka.vykon}
-                      {polozka.poznamka && (
-                        <span className="mt-0.5 block text-xs text-ink-soft/80">
-                          {polozka.poznamka}
-                        </span>
-                      )}
-                    </th>
-                    <td className="whitespace-nowrap px-6 py-3.5 text-right font-semibold tabular-nums text-ink sm:px-8 sm:py-4">
-                      {polozka.cena}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            {/* Popisný seznam místo tabulky: na úzkém displeji může cena
+                spadnout na vlastní řádek, aniž by se rozbila sémantika. */}
+            <dl className="divide-y divide-sand-100">
+              {skupina.polozky.map((polozka) => (
+                <div
+                  key={polozka.vykon}
+                  className="px-6 py-4 transition-colors hover:bg-brand-50/60 sm:flex sm:items-baseline sm:justify-between sm:gap-6 sm:px-8"
+                >
+                  <dt className="text-ink-soft">
+                    {polozka.vykon}
+                    {polozka.poznamka && (
+                      <span className="mt-0.5 block text-xs text-ink-soft/80">
+                        {polozka.poznamka}
+                      </span>
+                    )}
+                  </dt>
+                  <dd className="mt-1.5 text-right font-semibold tabular-nums text-ink sm:mt-0 sm:shrink-0 sm:whitespace-nowrap">
+                    {polozka.cena}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         ))}
       </div>
