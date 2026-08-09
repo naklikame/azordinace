@@ -90,7 +90,7 @@ function Avatary() {
 
 export function Manifest() {
   return (
-    <section className="relative isolate overflow-hidden bg-brand-50 px-5 py-16 sm:py-24 lg:py-32">
+    <section className="relative isolate overflow-hidden bg-brand-50 px-5 py-12 sm:py-24 lg:py-32">
       <Vzor />
 
       <div className="reveal mx-auto max-w-4xl text-center">
@@ -98,7 +98,7 @@ export function Manifest() {
           {manifest.stitek}
         </p>
 
-        <h2 className="mt-10 text-[clamp(1.75rem,4.2vw,2.9rem)] font-medium leading-[1.28] tracking-tight text-ink">
+        <h2 className="mt-6 text-[clamp(1.5rem,4.2vw,2.9rem)] font-medium leading-[1.28] tracking-tight text-ink sm:mt-10">
           {manifest.nadpisCast1}
           <span className="mx-1.5 inline-grid size-[1.15em] place-items-center rounded-full bg-brand-600 align-middle text-white">
             <ZubIcon className="size-[0.62em]" />
@@ -108,7 +108,9 @@ export function Manifest() {
           {manifest.nadpisCast3}
         </h2>
 
-        <p className="mx-auto mt-8 max-w-lg text-[0.95rem] leading-relaxed text-ink-soft">
+        {/* Prohlášení nese nadpis; tenhle odstavec je na telefonu už jen
+            další porce textu pod ním, proto se ukáže až od tabletu výš. */}
+        <p className="mx-auto mt-8 hidden max-w-lg text-[0.95rem] leading-relaxed text-ink-soft sm:block">
           {manifest.perexPred}{" "}
           <strong className="font-semibold text-ink">
             {manifest.perexTucne}
@@ -118,7 +120,7 @@ export function Manifest() {
 
         <a
           href={manifest.ctaOdkaz}
-          className="stisk group mt-10 inline-flex items-center gap-3 rounded-full bg-accent-700 py-2 pl-6 pr-2 font-semibold text-white transition-colors hover:bg-accent-800"
+          className="stisk group mt-8 inline-flex items-center gap-3 rounded-full bg-accent-700 py-2 pl-6 pr-2 font-semibold text-white transition-colors hover:bg-accent-800 sm:mt-10"
         >
           {manifest.cta}
           <span

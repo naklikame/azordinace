@@ -1,7 +1,13 @@
 import Image from "next/image";
 import { fotky, hero, klinika } from "@/content/klinika";
 import { Foto } from "@/components/foto";
-import { MailIcon, PinIcon, SipkaIcon, TelefonIcon } from "@/components/icons";
+import {
+  MailIcon,
+  PinIcon,
+  SipkaIcon,
+  TelefonIcon,
+  ZubIcon,
+} from "@/components/icons";
 import { Stitek } from "@/components/stitek";
 
 const telHref = `tel:${klinika.telefon.replace(/\s/g, "")}`;
@@ -35,7 +41,17 @@ export function Hero() {
 
           <div className="relative grid lg:min-h-[36rem] lg:grid-cols-[40%_60%]">
             {/* ── Levá polovina ── */}
-            <div className="nastup flex flex-col rounded-4xl bg-white px-6 py-9 sm:px-9 sm:py-10 lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14 xl:px-14">
+            <div className="nastup relative isolate flex flex-col overflow-hidden rounded-4xl bg-white px-6 py-9 sm:px-9 sm:py-10 lg:overflow-visible lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14 xl:px-14">
+              {/* Zub v prázdném rohu pod tlačítky. Stejná silueta i tenký obrys
+                  jako ozdobná vrstva na pozadí webu — ta je ale za bílou kartou
+                  neviditelná, tady ji tedy zopakujeme uvnitř. Na širokém
+                  displeji je v rohu fotka, tam by zavazel. Kreslí se pod obsah,
+                  `isolate` na panelu ho drží nad bílým podkladem. */}
+              <ZubIcon
+                strokeWidth={0.35}
+                style={{ rotate: "12deg" }}
+                className="pointer-events-none absolute -bottom-16 -right-14 -z-10 w-64 text-brand-300/45 lg:hidden"
+              />
               <p className="mb-6 inline-flex max-w-xs items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-4 py-1.5 text-xs font-semibold text-brand-800 backdrop-blur-sm">
                 <span
                   aria-hidden="true"

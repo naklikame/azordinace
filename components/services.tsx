@@ -15,13 +15,15 @@ export function Services() {
         popis="Od preventivní prohlídky po korunku. Nikam vás neposíláme."
       />
 
-      <ul className="kaskada mt-12 -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3"
+      {/* Podmřížka srovná ikony, názvy i popisy napříč kartami — jednořádkový
+          a dvouřádkový název by jinak celý zbytek karty posunul. */}
+      <ul className="kaskada mt-8 -mx-3 grid snap-x snap-mandatory grid-flow-col auto-cols-[min(82%,20rem)] grid-rows-[auto_auto_1fr_auto] gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:mt-12 sm:grid-flow-row sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
         tabIndex={0}
         aria-label="Přehled služeb, na telefonu posuvný do stran">
         {sluzby.map((sluzba, i) => (
           <li
             key={sluzba.id}
-            className="zdvih group relative flex flex-col overflow-hidden rounded-4xl border border-sand-200 bg-white p-7 hover:border-brand-300 sm:p-8 w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none"
+            className="zdvih group relative row-span-4 grid snap-start grid-rows-subgrid gap-y-0 overflow-hidden rounded-4xl border border-sand-200 bg-white p-7 hover:border-brand-300 sm:p-8"
           >
             {/* Pořadové číslo v duchu velkých lehkých číslic ze sekce výše */}
             <span
@@ -54,7 +56,8 @@ export function Services() {
         ))}
 
         {/* Barevná karta uzavírá mřížku a odvádí na objednávku */}
-        <li className="zdvih relative flex flex-col justify-between overflow-hidden rounded-4xl bg-brand-700 p-7 text-white sm:col-span-2 sm:p-8 lg:col-span-1 w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none">
+        {/* Závěrečná karta má jinou stavbu, takže jen zabírá stejnou výšku */}
+        <li className="zdvih relative row-span-4 flex snap-start flex-col justify-between overflow-hidden rounded-4xl bg-brand-700 p-7 text-white sm:col-span-2 sm:p-8 lg:col-span-1">
           <div
             aria-hidden="true"
             className="zar pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-brand-500/40 blur-3xl"

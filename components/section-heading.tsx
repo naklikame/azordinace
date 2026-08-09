@@ -43,16 +43,21 @@ export function SectionHeading({
       </div>
 
       <h2
-        className={`mt-8 max-w-3xl font-display text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-tight ${
+        className={`mt-6 max-w-3xl font-display text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-tight sm:mt-8 ${
           tmava ? "text-white" : "text-ink"
         }`}
       >
         {nadpis}
       </h2>
 
+      {/*
+        Doprovodná věta je na telefonu jen schovaná, ne vypuštěná: v kódu
+        stránky zůstává pro vyhledávače i odečítače. Nadpis sám o sobě řekne
+        dost a pět takových odstavců pod sebou dělalo ze stránky text.
+      */}
       {popis && (
         <p
-          className={`mt-5 max-w-xl leading-relaxed ${
+          className={`mt-5 hidden max-w-xl leading-relaxed sm:block ${
             tmava ? "text-brand-100" : "text-ink-soft"
           }`}
         >

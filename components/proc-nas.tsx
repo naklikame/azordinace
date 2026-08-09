@@ -13,8 +13,11 @@ export function ProcNas() {
   return (
     <section className="px-3 py-12 sm:px-4 sm:py-16 lg:px-6 lg:py-24">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:gap-12">
-        {/* ── Panel s fotkou ── */}
-        <div className="relative isolate flex min-h-[26rem] flex-col overflow-hidden rounded-4xl bg-brand-700 px-6 pt-9 sm:min-h-[32rem] text-white sm:px-10 lg:min-h-[38rem] lg:pb-8">
+        {/* ── Panel s fotkou ──
+            Na telefonu se neukazuje vůbec: zabíral celou obrazovku a nesl
+            jen nadpis, který sekci nese i bez něj. Tam zůstanou samotná
+            čísla, ta mluví za sebe. */}
+        <div className="relative isolate hidden flex-col overflow-hidden rounded-4xl bg-brand-700 px-6 pt-9 text-white sm:flex sm:min-h-[32rem] sm:px-10 lg:min-h-[38rem] lg:pb-8">
           <div
             aria-hidden="true"
             className="zar pointer-events-none absolute -left-20 -top-20 -z-10 size-80 rounded-full bg-brand-500/30 blur-3xl"
@@ -77,17 +80,19 @@ export function ProcNas() {
             </span>
           </div>
 
-          <dl className="kaskada grid grid-cols-1 sm:grid-cols-2">
+          {/* Na telefonu čtyři čísla pod sebou zabírala celou obrazovku, proto
+              jsou ve dvou sloupcích a v menším měřítku. */}
+          <dl className="kaskada grid grid-cols-2">
             {procNas.vyhody.map((vyhoda) => (
               <div
                 key={vyhoda.nazev}
-                className="border-b border-sand-200 py-8 sm:odd:border-r sm:odd:pr-8 sm:even:pl-8"
+                className="border-b border-sand-200 py-5 odd:border-r odd:pr-4 even:pl-4 sm:py-8 sm:odd:pr-8 sm:even:pl-8"
               >
                 <dt>
-                  <span className="block font-display text-[clamp(2.75rem,6vw,4rem)] font-light leading-none tracking-tight text-ink tabular-nums">
+                  <span className="block font-display text-[clamp(2rem,9vw,4rem)] font-light leading-none tracking-tight text-ink tabular-nums">
                     {vyhoda.hodnota}
                   </span>
-                  <span className="mt-3 block font-semibold text-ink">
+                  <span className="mt-2 block text-sm font-semibold leading-snug text-ink sm:mt-3 sm:text-base">
                     {vyhoda.nazev}
                   </span>
                 </dt>

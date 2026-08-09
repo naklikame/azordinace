@@ -25,17 +25,19 @@ export function Testimonials() {
             </a>
           </div>
 
+          {/* Podmřížka srovná podpisy pod citacemi napříč kartami, i když
+              je každé hodnocení jinak dlouhé. */}
           <ul
-            className="kaskada -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-2"
+            className="kaskada -mx-3 grid snap-x snap-mandatory grid-flow-col auto-cols-[min(82%,20rem)] grid-rows-[1fr_auto] gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid-flow-row sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0"
             tabIndex={0}
             aria-label="Hodnocení pacientů, na telefonu posuvná do stran"
           >
             {reference.map((r) => (
               <li
                 key={r.jmeno}
-                className="zdvih rounded-4xl bg-white/[0.07] p-6 ring-1 ring-white/10 backdrop-blur-sm sm:p-7 w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none"
+                className="zdvih row-span-2 grid snap-start grid-rows-subgrid gap-y-0 rounded-4xl bg-white/[0.07] p-6 ring-1 ring-white/10 backdrop-blur-sm sm:p-7"
               >
-                <figure>
+                <figure className="row-span-2 grid grid-rows-subgrid gap-y-0">
                   <blockquote className="leading-relaxed text-brand-50">
                     „{r.text}“
                   </blockquote>

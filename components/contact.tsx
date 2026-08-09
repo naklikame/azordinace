@@ -74,7 +74,7 @@ export function Contact() {
         popis="Vyplňte formulář a ozveme se vám. Když zub bolí, radši rovnou zavolejte."
       />
 
-      <div className="mt-12 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mt-8 grid gap-4 sm:mt-12 lg:grid-cols-[1.05fr_0.95fr]">
         <div
           id="objednat"
           className="scroll-mt-28 rounded-4xl border border-sand-200 bg-white p-8 sm:p-10"
