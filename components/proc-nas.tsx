@@ -91,7 +91,7 @@ export function ProcNas() {
                     {vyhoda.nazev}
                   </span>
                 </dt>
-                <dd className="mt-2 max-w-xs text-sm leading-relaxed text-ink-soft">
+                <dd className="mt-2 hidden max-w-xs text-sm leading-relaxed text-ink-soft sm:block">
                   {vyhoda.popis}
                 </dd>
               </div>

@@ -79,7 +79,7 @@ export function SiteFooter() {
             </ul>
           </nav>
 
-          <nav aria-labelledby="footer-sluzby">
+          <nav aria-labelledby="footer-sluzby" className="hidden sm:block">
             <h2
               id="footer-sluzby"
               className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50"

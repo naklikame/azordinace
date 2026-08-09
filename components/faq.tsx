@@ -25,7 +25,7 @@ export function Faq() {
           stitek="Časté dotazy"
           stitekVpravo={`${faq.length} otázek`}
           nadpis="Na co se nás ptáte nejčastěji"
-          popis="Nenašli jste, co potřebujete? Zavolejte nám nebo napište do zprávy ve formuláři níž."
+          popis="Nenašli jste, co potřebujete? Zavolejte nám."
         />
 
         <ul className="kaskada space-y-3 lg:pt-2">

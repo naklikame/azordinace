@@ -14,7 +14,7 @@ export function Pricing() {
         stitek="Ceník"
         stitekVpravo={`${pocetVykonu} výkonů`}
         nadpis="Ceny, které znáte předem"
-        popis="Ceny nejčastějších výkonů. Konkrétní částku vám řekneme dřív, než se pustíme do práce. Kompletní ceník najdete v ordinaci."
+        popis="Ceny nejčastějších výkonů. Kompletní ceník najdete v ordinaci."
       />
 
       <div
@@ -123,9 +123,8 @@ export function Pricing() {
       </div>
 
       <p className="mt-6 text-sm text-ink-soft">
-        Ceník je orientační a není nabídkou ve smyslu občanského zákoníku.
-        Výkony hrazené z veřejného zdravotního pojištění účtujeme dle úhradové
-        vyhlášky.
+        Ceník je orientační. Výkony hrazené z veřejného pojištění účtujeme
+        dle úhradové vyhlášky.
       </p>
     </section>
   );

@@ -14,7 +14,7 @@ export function Testimonials() {
               varianta="tmava"
               stitek="Reference"
               nadpis="Co říkají naši pacienti"
-              popis="Výběr z toho, co nám pacienti napsali. Děkujeme za ně. Nejvíc nám pomáhá, když nás doporučíte dál."
+              popis="Výběr z toho, co nám pacienti napsali."
             />
 
             <a

@@ -12,7 +12,7 @@ export function Services() {
         stitek="Naše služby"
         stitekVpravo={`${sluzby.length} oborů`}
         nadpis="Všechno, co vaše zuby potřebují, na jednom místě"
-        popis="Od preventivní prohlídky po korunku. Nikam vás neposíláme, ošetří vás stejný tým, který vás už zná."
+        popis="Od preventivní prohlídky po korunku. Nikam vás neposíláme."
       />
 
       <ul className="kaskada mt-12 -mx-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3"
@@ -42,7 +42,7 @@ export function Services() {
               {sluzba.popis}
             </p>
 
-            <ul className="relative mt-6 space-y-2.5 border-t border-sand-100 pt-6">
+            <ul className="relative mt-6 hidden space-y-2.5 border-t border-sand-100 pt-6 sm:block">
               {sluzba.body.map((bod) => (
                 <li key={bod} className="flex gap-2.5 text-sm text-ink-soft">
                   <CheckIcon className="mt-0.5 size-4 shrink-0 text-brand-600" />

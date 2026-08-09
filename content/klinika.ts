@@ -133,7 +133,7 @@ export const procNas = {
       hodnota: "8",
       nazev: "oborů pod jednou střechou",
       popis:
-        "Prevence, hygiena, plomby, kanálky, korunky, chirurgie, bělení i péče o děti. Na nic vás neposíláme jinam.",
+        "Od prevence po chirurgii. Na nic vás neposíláme jinam.",
     },
     {
       hodnota: "5",
@@ -176,7 +176,7 @@ export const sluzby: Sluzba[] = [
     id: "prevence",
     nazev: "Preventivní prohlídka",
     popis:
-      "Nejlevnější ošetření je to, které nemusíte podstoupit. Na prohlídce najdeme kaz dřív, než se ozve, a pojišťovna ji hradí celou.",
+      "Najdeme kaz dřív, než se ozve. Pojišťovna prohlídku hradí celou.",
     body: [
       "Vstupní i preventivní prohlídka hrazená pojišťovnou",
       "RTG snímek hrazený pojišťovnou",
@@ -188,7 +188,7 @@ export const sluzby: Sluzba[] = [
     id: "hygiena",
     nazev: "Dentální hygiena",
     popis:
-      "Kartáček se ke všemu nedostane. Sundáme zubní kámen i pigmentace z kávy a čaje a ukážeme vám, jak si doma poradit sami.",
+      "Sundáme zubní kámen i pigmentace, na které kartáček nestačí.",
     body: [
       "Odstranění kamene a povlaku",
       "Nácvik čištění na vašich zubech",
@@ -200,7 +200,7 @@ export const sluzby: Sluzba[] = [
     id: "zachovna",
     nazev: "Záchovná stomatologie",
     popis:
-      "Bílé fotokompozitní výplně, které ve tváři nepoznáte. Pracujeme v umrtvení, které hradí pojišťovna, takže ošetření prakticky neucítíte.",
+      "Bílé výplně, které ve tváři nepoznáte. Ošetření prakticky neucítíte.",
     body: [
       "Bílé fotokompozitní výplně",
       "Ošetření zubního kazu",
@@ -212,7 +212,7 @@ export const sluzby: Sluzba[] = [
     id: "endodoncie",
     nazev: "Endodontické ošetření",
     popis:
-      "Když se kaz dostane až k nervu, ještě není konec. Kanálky vyčistíme, vydezinfikujeme a zaplníme. Zub vám zůstane.",
+      "Když se kaz dostane až k nervu, zub se dá pořád zachránit.",
     body: [
       "Ošetření kořenových kanálků",
       "Definitivní plnění kanálků",
@@ -224,7 +224,7 @@ export const sluzby: Sluzba[] = [
     id: "protetika",
     nazev: "Stomatologická protetika",
     popis:
-      "Pro chvíle, kdy zub chybí nebo z něj mnoho nezbylo. Korunky metalokeramické i celokeramické, inlaye a onlaye z materiálu Nexco.",
+      "Pro chvíle, kdy zub chybí nebo z něj mnoho nezbylo.",
     body: [
       "Metalokeramické a celokeramické korunky",
       "Inlaye a onlaye z materiálu Nexco",
@@ -236,7 +236,7 @@ export const sluzby: Sluzba[] = [
     id: "chirurgie",
     nazev: "Stomatologická chirurgie",
     popis:
-      "Někdy zub zachránit nejde. I tak platí, že dopředu víte, co se bude dít, jak dlouho to potrvá a jak se pak o ránu postarat.",
+      "Někdy zub zachránit nejde. Dopředu ale víte, co vás čeká.",
     body: [
       "Extrakce zubů",
       "Drobné chirurgické zákroky",
@@ -248,7 +248,7 @@ export const sluzby: Sluzba[] = [
     id: "beleni",
     nazev: "Bělení zubů",
     popis:
-      "Zesvětlení skloviny o několik odstínů. Nejdřív zkontrolujeme zuby i dásně, na zdravém podkladu totiž výsledek vydrží mnohem déle.",
+      "Zesvětlení skloviny o několik odstínů, vždy až po kontrole zubů a dásní.",
     body: [
       "Kontrola zubů a dásní předem",
       "Šetrné bělení skloviny",
@@ -260,7 +260,7 @@ export const sluzby: Sluzba[] = [
     id: "deti",
     nazev: "Dětská stomatologie",
     popis:
-      "První návštěva rozhodne o všech dalších. Dítě si může všechno prohlédnout, na nic netlačíme a nikdo nikam nespěchá.",
+      "První návštěva rozhodne o všech dalších. Na nic netlačíme.",
     body: [
       "Prohlídky a ošetření dětí",
       "Bez stresu a bez spěchu",
@@ -365,7 +365,7 @@ export const ordinace: Ordinace[] = [
     sestraId: "lobodasova",
     perex: "Komplexní péče o dospělé i děti",
     popis:
-      "Ordinace MUDr. Alexandry Azarkevich. Vezme si vás od vstupní prohlídky přes výplně až po korunky a chirurgické zákroky. U dětí si dá záležet, aby první návštěva nebyla ta poslední.",
+      "Vezme si vás od vstupní prohlídky přes výplně až po korunky a chirurgické zákroky. U dětí si dá záležet, aby první návštěva nebyla ta poslední.",
     zamereni: ["prevence", "zachovna", "endodoncie", "chirurgie", "deti"],
   },
   {
@@ -376,7 +376,7 @@ export const ordinace: Ordinace[] = [
     sestraId: "babadzanjan",
     perex: "Prevence, protetika a estetika",
     popis:
-      "Ordinace MUDr. Jany Housové. Zaměřuje se na prevenci a dentální hygienu, protetické práce a bělení. Dbá na to, aby vám dopředu srozumitelně vysvětlila, co a proč se bude dít.",
+      "Zaměřuje se na prevenci a dentální hygienu, protetiku a bělení. Dopředu srozumitelně vysvětlí, co a proč se bude dít.",
     zamereni: ["prevence", "hygiena", "protetika", "beleni"],
   },
 ];

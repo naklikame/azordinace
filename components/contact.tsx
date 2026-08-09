@@ -71,7 +71,7 @@ export function Contact() {
         stitek="Kontakt"
         stitekVpravo="Ozveme se zpět"
         nadpis="Objednejte se online"
-        popis="Vyplňte formulář a my se vám ozveme a domluvíme termín. Když to hoří a zub bolí, radši rovnou zavolejte."
+        popis="Vyplňte formulář a ozveme se vám. Když zub bolí, radši rovnou zavolejte."
       />
 
       <div className="mt-12 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
@@ -150,7 +150,7 @@ export function Contact() {
               title={`Mapa: ${klinika.nazev}, ${adresa.ulice}`}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="h-72 w-full border-0"
+              className="h-56 w-full border-0 sm:h-72"
             />
           </div>
         </div>

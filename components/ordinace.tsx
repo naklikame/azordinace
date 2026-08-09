@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { clenTymu, ordinace, sluzby } from "@/content/klinika";
-import { Foto } from "@/components/foto";
+import Image from "next/image";
 import { SipkaIcon } from "@/components/icons";
 import { SectionHeading } from "@/components/section-heading";
 
@@ -14,7 +14,7 @@ export function Ordinace() {
         stitek="Naše ordinace"
         stitekVpravo={`${ordinace.length} ordinace`}
         nadpis="Dvě ordinace, jeden tým"
-        popis="Ošetřujeme ve dvou ordinacích. U každé najdete, kdo v ní pracuje a čemu se věnuje, abyste věděli, kdo se o vás postará."
+        popis="U každé ordinace vidíte, kdo v ní pracuje a čemu se věnuje."
       />
 
       {/*
@@ -67,19 +67,22 @@ export function Ordinace() {
                 <div className="mt-7 flex flex-col gap-3 border-t border-sand-100 pt-6">
                   {[lekarka, sestra].map((clen) => (
                     <div key={clen.id} className="flex items-center gap-3">
-                      <div className="relative">
-                        <Foto
-                          src={clen.foto}
-                          alt=""
-                          napoveda={clen.iniciialy}
-                          className="size-11 shrink-0 rounded-full"
-                          pozice="center top"
-                          sizes="44px"
-                        />
-                        {!clen.foto && (
+                      {/* Zástupný rámeček z komponenty Foto je stavěný na velké
+                          plochy, v kolečku 44 px by se jeho odsazení nevešlo
+                          a iniciály by seděly mimo střed. */}
+                      <div className="relative size-11 shrink-0 overflow-hidden rounded-full bg-brand-700">
+                        {clen.foto ? (
+                          <Image
+                            src={clen.foto}
+                            alt=""
+                            fill
+                            sizes="44px"
+                            className="object-cover object-top"
+                          />
+                        ) : (
                           <span
                             aria-hidden="true"
-                            className="absolute inset-0 grid place-items-center rounded-full bg-brand-700 font-display text-xs font-extrabold text-white"
+                            className="grid size-full place-items-center font-display text-xs font-extrabold text-white"
                           >
                             {clen.iniciialy}
                           </span>
@@ -97,7 +100,7 @@ export function Ordinace() {
                   ))}
                 </div>
 
-                <ul className="mt-6 flex flex-wrap gap-2">
+                <ul className="mt-6 hidden flex-wrap gap-2 sm:flex">
                   {zamereni.map((s) => (
                     <li
                       key={s.id}
