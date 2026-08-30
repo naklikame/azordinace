@@ -34,6 +34,12 @@
   /* Okraje formulářových prvků — musí mít vůči podkladu aspoň 3:1 (WCAG 1.4.11) */
   --color-sand-400: #6e8595;
 
+  /* Teplý neutrál odvozený ze snímku v hero sekci, jehož levá polovina má
+     #ebe8e5. Není to značková barva a nemá ji nahrazovat: slouží jako
+     protiváha neutrálů výš, které jsou tažené do modra. Zesvětlený proto,
+     že v plné síle je na velkou plochu příliš šedý. */
+  --color-warm-50: #f6f4f1;
+
   --color-ink: #11212b;
   --color-ink-soft: #4a5a66;
 

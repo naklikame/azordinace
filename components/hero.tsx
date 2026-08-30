@@ -15,7 +15,7 @@ const telHref = `tel:${klinika.telefon.replace(/\s/g, "")}`;
 /**
  * Štítky leží nad postavou v podkladu. Levý sloupec končí na 40 % šířky,
  * proto nic nesmí začínat dřív — jinak by to padlo na tlačítka.
- * Obličej lékařky je v horní části mezi 47 a 61 %, tomu se taky vyhýbáme.
+ * Hlava lékařky je v horní části mezi 42 a 61 %, tomu se taky vyhýbáme.
  */
 const poziceStitku = [
   "left-[42%] top-[52%]",
@@ -29,19 +29,22 @@ export function Hero() {
       <div className="mx-auto max-w-7xl">
         <div className="relative overflow-hidden rounded-4xl">
           {/* Podklad s lékařkou — uplatní se až tam, kde je dost místa.
-              Níž by kompozice obrázku ořezem ztratila smysl. */}
+              Níž by kompozice obrázku ořezem ztratila smysl.
+              Snímek je 16:9, panel na širokém displeji zhruba 2,14:1, takže se
+              ořezává shora a zdola. Ohnisko ve 20 % nechá nad hlavou vzduch;
+              na střed by lékařce seřízlo temeno. */}
           <Image
             src={fotky.heroPozadi}
             alt=""
             fill
             priority
             sizes="100vw"
-            className="hidden object-cover object-center lg:block"
+            className="hidden object-cover object-[center_20%] lg:block"
           />
 
           <div className="relative grid lg:min-h-[36rem] lg:grid-cols-[40%_60%]">
             {/* ── Levá polovina ── */}
-            <div className="nastup relative isolate flex flex-col overflow-hidden rounded-4xl bg-white px-6 py-9 sm:px-9 sm:py-10 lg:overflow-visible lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14 xl:px-14">
+            <div className="nastup relative isolate flex flex-col overflow-hidden rounded-4xl bg-warm-50 px-6 py-9 sm:px-9 sm:py-10 lg:overflow-visible lg:rounded-none lg:bg-transparent lg:px-10 lg:py-14 xl:px-14">
               {/* Zub v prázdném rohu pod tlačítky. Stejná silueta i tenký obrys
                   jako ozdobná vrstva na pozadí webu — ta je ale za bílou kartou
                   neviditelná, tady ji tedy zopakujeme uvnitř. Na širokém

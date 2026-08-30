@@ -59,8 +59,8 @@ export const klinika = {
  * sem cestu. Dokud je hodnota prázdná, zobrazí se zástupný rámeček s rozměrem.
  */
 export const fotky = {
-  /** Podklad hero sekce — bílá plocha vlevo, lékařka uprostřed, panel vpravo. */
-  heroPozadi: "/fotky/hero-pozadi.jpg",
+  /** Podklad hero sekce — teplá plocha vlevo, lékařka uprostřed, panel vpravo. */
+  heroPozadi: "/fotky/hero2.0.jpg",
   /** Portrét lékařky pro mobilní rozvržení, kde se podklad neuplatní. */
   heroPostava: "/fotky/person1.jpg",
   /** Tři portréty do skupinky avatarů v sekci s prohlášením, čtvercové. */

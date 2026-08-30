@@ -29,7 +29,7 @@ export function Pricing() {
             key={skupina.skupina}
             className="zdvih row-span-2 grid snap-start grid-rows-subgrid gap-y-0 overflow-hidden rounded-4xl border border-sand-200 bg-white"
           >
-            <div className="flex min-h-[4.75rem] items-center justify-between gap-4 border-b border-sand-200 bg-brand-50 px-6 py-5 sm:min-h-[5.25rem] sm:px-8 sm:py-6">
+            <div className="flex min-h-[4.75rem] items-center justify-between gap-4 border-b border-sand-200 bg-warm-50 px-6 py-5 sm:min-h-[5.25rem] sm:px-8 sm:py-6">
               <h3 className="font-display text-lg font-extrabold tracking-tight text-ink">
                 {skupina.skupina}
               </h3>
