@@ -1,14 +1,17 @@
 /**
  * Veškerý obsah webu na jednom místě.
- * Údaje pocházejí z původního webu zubniordinace-az.cz a z tištěné vizitky.
+ *
+ * Kontakty, ordinační dobu, seznam služeb a reference přebíráme z původního
+ * webu zubniordinace-az.cz a z tištěné vizitky. Ceník je proti němu nový —
+ * dodal ho klient a s částkami na starém webu se neshoduje, takže se podle
+ * něj neopravuje.
  */
 
 export const klinika = {
   nazev: "Zubní ordinace AZ",
   podtitul: "Praha 5 – Smíchov",
-  slogan: "Léčíme bez bolesti a strachu",
   perex:
-    "Zubní ordinace na Smíchově, pět minut od Anděla. Pečujeme o dospělé i děti v klidu, srozumitelně a bez zbytečné bolesti.",
+    "Zubní ordinace na Smíchově, pět minut od Anděla. Pečujeme o dospělé i děti a máme smlouvu s pěti pojišťovnami.",
 
   /** Provozovatel — fakturační údaje. */
   provozovatel: "OZAN centrum s.r.o.",
@@ -37,7 +40,7 @@ export const klinika = {
     "Tramvají do zastávky Křížová nebo Braunova, do 50 m od ordinace",
     "Autobusem 231 do zastávky Ke Koulce nebo Křížová, autobusem 120 do zastávky Křížová",
     "Blízko Smíchovského nádraží i městského okruhu, dobře dostupné i ze Středočeského kraje",
-    "Parkování zdarma přímo v ulici mimo rezidentní (modrou) zónu",
+    "Parkování je možné přímo v ulici mimo rezidentní (modrou) zónu",
   ],
 
   otviraciDoba: [
@@ -59,12 +62,11 @@ export const klinika = {
  * sem cestu. Dokud je hodnota prázdná, zobrazí se zástupný rámeček s rozměrem.
  */
 export const fotky = {
-  /** Podklad hero sekce — teplá plocha vlevo, lékařka uprostřed, panel vpravo. */
-  heroPozadi: "/fotky/hero2.0.jpg",
-  /** Portrét lékařky pro mobilní rozvržení, kde se podklad neuplatní. */
-  heroPostava: "/fotky/person1.jpg",
-  /** Tři portréty do skupinky avatarů v sekci s prohlášením, čtvercové. */
-  tymAvatary: ["", "", ""] as string[],
+  /**
+   * Snímek ordinace do hero sekce — na šířku, poměr 4:3. Převzato z galerie
+   * na původním webu zubniordinace-az.cz.
+   */
+  heroOrdinace: "/fotky/ordinace-hero.jpg" as string,
   /** Snímek do sekce „Proč si vybrat nás“ — na šířku, poměr 1,6:1. */
   procNasSnimek: "/fotky/proc-nas.jpg",
   /**
@@ -79,40 +81,16 @@ export const hero = {
   stitekNahore: "Přijímáme nové pacienty, včetně dětí a seniorů",
   nadpisRadky: ["Moderní péče", "o vaše zuby"],
   perex:
-    "Pečujeme o dospělé i děti na Smíchově. Vysvětlíme, co vás čeká, a nikam nespěcháme.",
+    "Zubní ordinace pro dospělé i děti na Smíchově, pět minut pěšky od Anděla.",
   cta: "Objednat se",
   ctaVedlejsi: "Služby a ceník",
-
-  panelNadpis: "Každý pacient má svoje tempo",
-  panelText:
-    "Pracujeme s moderním vybavením a kvalitními materiály. Prohlídku, snímek i umrtvení přitom hradí pojišťovna, nedoplácíte nic.",
-
-  /** Plovoucí štítky nad fotkou. */
-  stitky: ["Bez bolesti", "Klidné tempo", "Moderní vybavení"],
-} as const;
-
-/**
- * Vycentrované prohlášení pod hero sekcí. Nadpis se skládá ze tří částí,
- * mezi které se vkládají pilulky s ikonou a s portréty týmu.
- */
-export const manifest = {
-  stitek: "Zubní ordinace AZ",
-  nadpisCast1: "Moderní vybavení má smysl",
-  nadpisCast2: "jen tehdy, když za ním stojí lidé, se kterými se pacient",
-  nadpisCast3: "cítí v bezpečí.",
-  perexPred: "Většina lidí, co k nám přijde, má za sebou",
-  perexTucne: "špatnou zkušenost odjinud",
-  perexPo:
-    ". Proto vždycky začneme tím, že si vás vyslechneme. Teprve potom se sedá do křesla.",
-  cta: "Poznejte naše ordinace",
-  ctaOdkaz: "#ordinace",
 } as const;
 
 /** Pásový banner nad ceníkem. */
 export const banner = {
   stitek: "Nové registrace",
   nadpis: "Přijímáme nové pacienty",
-  text: "Dospělé, děti i seniory. Termíny máme flexibilní, takže se na první prohlídku dostanete bez dlouhého čekání.",
+  text: "Registrujeme dospělé, děti i seniory. Vstupní prohlídku včetně RTG hradí pojišťovna.",
   cta: "Objednat se",
   ctaOdkaz: "#objednat",
 } as const;
@@ -120,10 +98,7 @@ export const banner = {
 /** Sekce „Proč si vybrat nás“ — panel s fotkou vlevo, čísla vpravo. */
 export const procNas = {
   nadpisRadky: ["Proč právě", "k nám"],
-  podtitul: "Čtyři věci, kvůli kterým se k nám pacienti vracejí",
-
-  /** Plovoucí štítky nad fotkou. */
-  stitky: ["Bez bolesti", "Děti i dospělí", "Moderní vybavení"],
+  podtitul: "Obory, pojišťovny, ceny a dostupnost",
 
   stitekVlevo: "Výhody",
   stitekVpravo: "V číslech",
@@ -132,8 +107,7 @@ export const procNas = {
     {
       hodnota: "8",
       nazev: "oborů pod jednou střechou",
-      popis:
-        "Od prevence po chirurgii. Na nic vás neposíláme jinam.",
+      popis: "Od prevence po základní chirurgii.",
     },
     {
       hodnota: "5",
@@ -145,7 +119,7 @@ export const procNas = {
       hodnota: "0 Kč",
       nazev: "za preventivní prohlídku",
       popis:
-        "Vstupní i preventivní prohlídka, RTG snímek a lokální umrtvení jsou plně hrazené z pojištění.",
+        "Vstupní i preventivní prohlídka, RTG snímek a lokální anestézie jsou plně hrazené z pojištění.",
     },
     {
       hodnota: "5 min",
@@ -176,7 +150,7 @@ export const sluzby: Sluzba[] = [
     id: "prevence",
     nazev: "Preventivní prohlídka",
     popis:
-      "Najdeme kaz dřív, než se ozve. Pojišťovna prohlídku hradí celou.",
+      "Najdeme kaz dřív, než se ozve. Prohlídka hrazená pojišťovnou.",
     body: [
       "Vstupní i preventivní prohlídka hrazená pojišťovnou",
       "RTG snímek hrazený pojišťovnou",
@@ -188,23 +162,22 @@ export const sluzby: Sluzba[] = [
     id: "hygiena",
     nazev: "Dentální hygiena",
     popis:
-      "Sundáme zubní kámen i pigmentace, na které kartáček nestačí.",
+      "Odstraníme zubní kámen i pigmentace, na které kartáček nestačí.",
     body: [
       "Odstranění kamene a povlaku",
       "Nácvik čištění na vašich zubech",
-      "Doporučení pomůcek na míru",
+      "Individuální doporučení zubních pomůcek pro domácí péči",
     ],
     ikona: "jiskra",
   },
   {
     id: "zachovna",
     nazev: "Záchovná stomatologie",
-    popis:
-      "Bílé výplně, které ve tváři nepoznáte. Ošetření prakticky neucítíte.",
+    popis: "Kvalitní, estetické, fotokompozitní výplně.",
     body: [
       "Bílé fotokompozitní výplně",
       "Ošetření zubního kazu",
-      "Umrtvení hrazené pojišťovnou",
+      "Lokální anestézie hrazená pojišťovnou",
     ],
     ikona: "zub",
   },
@@ -223,8 +196,7 @@ export const sluzby: Sluzba[] = [
   {
     id: "protetika",
     nazev: "Stomatologická protetika",
-    popis:
-      "Pro chvíle, kdy zub chybí nebo z něj mnoho nezbylo.",
+    popis: "Náhrada zubu, který chybí nebo z něj mnoho nezbylo.",
     body: [
       "Metalokeramické a celokeramické korunky",
       "Inlaye a onlaye z materiálu Nexco",
@@ -235,12 +207,11 @@ export const sluzby: Sluzba[] = [
   {
     id: "chirurgie",
     nazev: "Stomatologická chirurgie",
-    popis:
-      "Někdy zub zachránit nejde. Dopředu ale víte, co vás čeká.",
+    popis: "Extrakce a drobné zákroky tam, kde zub zachránit nejde.",
     body: [
       "Extrakce zubů",
       "Drobné chirurgické zákroky",
-      "Vždy v lokálním umrtvení",
+      "Vždy v lokální anestézii",
     ],
     ikona: "chirurgie",
   },
@@ -259,13 +230,8 @@ export const sluzby: Sluzba[] = [
   {
     id: "deti",
     nazev: "Dětská stomatologie",
-    popis:
-      "První návštěva rozhodne o všech dalších. Na nic netlačíme.",
-    body: [
-      "Prohlídky a ošetření dětí",
-      "Bez stresu a bez spěchu",
-      "Poradenství pro rodiče",
-    ],
+    popis: "Prohlídky a ošetření dětí od prvních zubů.",
+    body: ["Prohlídky a ošetření dětí", "Poradenství pro rodiče"],
     ikona: "dite",
   },
 ];
@@ -275,22 +241,24 @@ export type ClenTymu = {
   jmeno: string;
   titul: string;
   role: "lekarka" | "sestra";
-  specializace: string;
-  bio: string;
   iniciialy: string;
   /** Portrét na výšku, 600 × 800 px. Prázdné = zástupný rámeček s iniciálami. */
   foto: string;
 };
 
+/** Popis role do strukturovaných dat. Na stránce se neukazuje. */
+export const nazevRole: Record<ClenTymu["role"], string> = {
+  lekarka: "Zubní lékařka",
+  sestra: "Zdravotní sestra",
+};
+
 export const tym: ClenTymu[] = [
   {
-    id: "azarkevich",
-    jmeno: "Alexandra Azarkevich",
+    id: "navratilova",
+    jmeno: "Alexandra Navrátilová",
     titul: "MUDr.",
     role: "lekarka",
-    specializace: "Zubní lékařka",
-    bio: "Vede ordinaci na Smíchově. Ošetřuje dospělé i děti a zakládá si na tom, aby z křesla nikdo neodcházel s nepříjemným pocitem.",
-    iniciialy: "AA",
+    iniciialy: "AN",
     foto: "",
   },
   {
@@ -298,28 +266,15 @@ export const tym: ClenTymu[] = [
     jmeno: "Jana Housová",
     titul: "MUDr.",
     role: "lekarka",
-    specializace: "Zubní lékařka",
-    bio: "Stará se o pacienty napříč obory, od preventivních prohlídek přes výplně až po korunky. V klidu vysvětlí i to, na co jste se báli zeptat.",
     iniciialy: "JH",
     foto: "",
   },
   {
-    id: "lobodasova",
-    jmeno: "Jiřina Lobodášová",
-    titul: "",
-    role: "sestra",
-    specializace: "Zdravotní sestra",
-    bio: "Zvedne telefon, domluví termín a je s vámi i v ordinaci. Díky ní návštěva odsýpá a nikdo nebloudí.",
-    iniciialy: "JL",
-    foto: "",
-  },
-  {
+    /** Sestra je jedna a pracuje pro obě ordinace. */
     id: "babadzanjan",
     jmeno: "Lena Babadžanjan",
     titul: "",
     role: "sestra",
-    specializace: "Zdravotní sestra",
-    bio: "Postará se o vás od příchodu až po domluvení další kontroly a asistuje při ošetření.",
     iniciialy: "LB",
     foto: "",
   },
@@ -339,9 +294,8 @@ export type Ordinace = {
   lekarId: string;
   sestraId: string;
   perex: string;
-  popis: string;
-  /** Odkazy do seznamu `sluzby` — na co se ordinace zaměřuje. */
-  zamereni: string[];
+  /** Snímek ordinace na šířku, poměr 4:3. Prázdné = zástupný rámeček. */
+  foto: string;
 };
 
 /**
@@ -354,19 +308,19 @@ export type Ordinace = {
  *  - zda obě ordinace sídlí na stejné adrese (texty proto o adrese mlčí
  *    a podstránky zobrazují adresu kliniky),
  *  - zda mají shodnou otevírací dobu (teď sdílejí dobu celé kliniky),
- *  - zaměření jednotlivých ordinací.
+ *  - které snímky patří ke které ordinaci. Fotky pocházejí z galerie na
+ *    původním webu a jsou to prokazatelně dvě různé místnosti, ale že první
+ *    je Ordinace I a druhá Ordinace II, je jen domněnka.
  */
 export const ordinace: Ordinace[] = [
   {
     id: "ordinace-1",
     nazev: "Ordinace I",
     poradi: "01",
-    lekarId: "azarkevich",
-    sestraId: "lobodasova",
+    lekarId: "navratilova",
+    sestraId: "babadzanjan",
     perex: "Komplexní péče o dospělé i děti",
-    popis:
-      "Vezme si vás od vstupní prohlídky přes výplně až po korunky a chirurgické zákroky. U dětí si dá záležet, aby první návštěva nebyla ta poslední.",
-    zamereni: ["prevence", "zachovna", "endodoncie", "chirurgie", "deti"],
+    foto: "/fotky/ordinace-1.jpg",
   },
   {
     id: "ordinace-2",
@@ -374,10 +328,8 @@ export const ordinace: Ordinace[] = [
     poradi: "02",
     lekarId: "housova",
     sestraId: "babadzanjan",
-    perex: "Prevence, protetika a estetika",
-    popis:
-      "Zaměřuje se na prevenci a dentální hygienu, protetiku a bělení. Dopředu srozumitelně vysvětlí, co a proč se bude dít.",
-    zamereni: ["prevence", "hygiena", "protetika", "beleni"],
+    perex: "Komplexní péče o dospělé i děti",
+    foto: "/fotky/ordinace-2.jpg",
   },
 ];
 
@@ -404,7 +356,7 @@ export const cenik: CenikSkupina[] = [
       { vykon: "Vstupní prohlídka", cena: "hrazeno ZP" },
       { vykon: "Preventivní prohlídka", cena: "hrazeno ZP" },
       { vykon: "Zhotovení RTG", cena: "hrazeno ZP" },
-      { vykon: "Aplikace lokální anestezie", cena: "hrazeno ZP" },
+      { vykon: "Aplikace lokální anestézie", cena: "hrazeno ZP" },
     ],
   },
   {
@@ -477,12 +429,12 @@ export const faq: FaqPolozka[] = [
   {
     otazka: "Máte smlouvu se zdravotními pojišťovnami?",
     odpoved:
-      "Ano, s VZP (111), ZP MV ČR (211), OZP (207), VoZP (201) a RBP (213). Vstupní i preventivní prohlídka, RTG snímek a lokální umrtvení jsou hrazené v plné výši. Doplácí se jen nadstandardní materiály a estetické výkony.",
+      "Ano, s VZP (111), ZP MV ČR (211), OZP (207), VoZP (201) a RBP (213). Vstupní i preventivní prohlídka, RTG snímek a lokální anestézie jsou hrazené v plné výši. Doplácí se jen nadstandardní materiály a estetické výkony.",
   },
   {
     otazka: "Jak se k vám dostanu?",
     odpoved:
-      "Najdete nás na adrese Ke Koulce 1704/6, Praha 5 – Smíchov. Od metra B Anděl je to pět minut pěšky, zastávky tramvají Křížová a Braunova i autobusů 231 a 120 máte do padesáti metrů. Zaparkovat můžete zdarma v ulici mimo rezidentní zónu.",
+      "Najdete nás na adrese Ke Koulce 1704/6, Praha 5 – Smíchov. Od metra B Anděl je to pět minut pěšky, zastávky tramvají Křížová a Braunova i autobusů 231 a 120 máte do padesáti metrů. Parkování možné přímo v ulici.",
   },
   {
     otazka: "Kdy ordinujete?",
@@ -507,7 +459,7 @@ export const faq: FaqPolozka[] = [
   {
     otazka: "Bojím se zubaře. Jak to řešíte?",
     odpoved:
-      "Nejste sami a není to nic, za co byste se měli stydět. Dopředu vám řekneme, co se bude dít, umrtvíme dostatečně a domluvíme se na signálu, kterým si kdykoli řeknete o přestávku.",
+      "Nejste sami a není to nic, za co byste se měli stydět. Dopředu vám řekneme, co se bude dít, dostatečně umrtvíme a domluvíme se na signálu, kterým si kdykoli řeknete o přestávku.",
   },
   {
     otazka: "Kde najdu kompletní ceník?",

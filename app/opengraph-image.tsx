@@ -49,7 +49,7 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <span style={{ fontSize: 76, fontWeight: 700, lineHeight: 1.1 }}>
-            {klinika.slogan}
+            Zubní ordinace pro dospělé i děti
           </span>
           <span style={{ fontSize: 30, color: "#bce2f2", maxWidth: 880 }}>
             Prevence, hygiena, protetika i péče o děti. {klinika.adresa.mesto}

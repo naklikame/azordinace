@@ -53,8 +53,8 @@ export function SiteFooter() {
               </span>
             </div>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">
-              {klinika.slogan}. Zubní ordinace pro dospělé i děti na Smíchově,
-              pár minut od Anděla.
+              Zubní ordinace pro dospělé i děti na Smíchově, pár minut od
+              Anděla. Smlouva s pěti pojišťovnami.
             </p>
           </div>
 

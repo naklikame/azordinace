@@ -169,38 +169,6 @@
     animation-range: 0 160px;
   }
 
-  /*
-   * Plovoucí štítky nad fotkami. V klidu se pomalu vznášejí, při najetí myší
-   * se zastaví, nadzvednou a tečka se rozsvítí. Vznášení jede na `translate`,
-   * aby se nepralo s `transform` z hoveru.
-   */
-  .bublina {
-    pointer-events: auto;
-    animation: bublina-plave 7s ease-in-out infinite;
-    transition:
-      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.35s ease,
-      background-color 0.35s ease;
-  }
-
-  .bublina:hover {
-    animation-play-state: paused;
-    transform: translateY(-3px) scale(1.04);
-    background-color: #fff;
-    box-shadow: 0 16px 34px -16px rgba(17, 33, 43, 0.55);
-  }
-
-  .bublina-tecka {
-    transition:
-      scale 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 0.35s ease;
-  }
-
-  .bublina:hover .bublina-tecka {
-    scale: 1.5;
-    background-color: var(--color-accent-600);
-  }
-
   /* Ornamenty na pozadí se sotva znatelně přelévají, ať nejsou jako obtisk.
      Natočení nese `rotate` z inline stylu, animace proto sahá jen na posun. */
   .ornament {
@@ -290,26 +258,6 @@
 
 /* Dráha vede i do stran a s drobným náklonem, aby to plulo, ne jezdilo.
    `rotate` je samostatná vlastnost, takže si s hoverem nepřekáží. */
-@keyframes bublina-plave {
-  0%,
-  100% {
-    translate: 0 0;
-    rotate: 0deg;
-  }
-  25% {
-    translate: 4px -8px;
-    rotate: 0.7deg;
-  }
-  50% {
-    translate: 0 -13px;
-    rotate: 0deg;
-  }
-  75% {
-    translate: -4px -7px;
-    rotate: -0.7deg;
-  }
-}
-
 @keyframes ornament-dech {
   0%,
   100% {

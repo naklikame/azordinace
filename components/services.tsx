@@ -12,7 +12,7 @@ export function Services() {
         stitek="Naše služby"
         stitekVpravo={`${sluzby.length} oborů`}
         nadpis="Všechno, co vaše zuby potřebují, na jednom místě"
-        popis="Od preventivní prohlídky po korunku. Nikam vás neposíláme."
+        popis="Od preventivní prohlídky po korunku."
       />
 
       {/* Podmřížka srovná ikony, názvy i popisy napříč kartami — jednořádkový
@@ -55,8 +55,8 @@ export function Services() {
           </li>
         ))}
 
-        {/* Barevná karta uzavírá mřížku a odvádí na objednávku */}
-        {/* Závěrečná karta má jinou stavbu, takže jen zabírá stejnou výšku */}
+        {/* Barevná karta uzavírá mřížku a odvádí na objednávku. Má jinou
+            stavbu než ostatní, takže jen zabírá stejnou výšku. */}
         <li className="zdvih relative row-span-4 flex snap-start flex-col justify-between overflow-hidden rounded-4xl bg-brand-700 p-7 text-white sm:col-span-2 sm:p-8 lg:col-span-1">
           <div
             aria-hidden="true"

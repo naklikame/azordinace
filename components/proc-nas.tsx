@@ -1,13 +1,5 @@
 import { fotky, procNas } from "@/content/klinika";
 import { Foto } from "@/components/foto";
-import { Stitek } from "@/components/stitek";
-
-/** Rozmístění štítků nad fotkou — kopíruje kompozici z předlohy. */
-const poziceStitku = [
-  "right-[5%] top-[8%]",
-  "right-[15%] top-[42%]",
-  "right-[7%] bottom-[10%]",
-];
 
 export function ProcNas() {
   return (
@@ -17,7 +9,7 @@ export function ProcNas() {
             Na telefonu se neukazuje vůbec: zabíral celou obrazovku a nesl
             jen nadpis, který sekci nese i bez něj. Tam zůstanou samotná
             čísla, ta mluví za sebe. */}
-        <div className="relative isolate hidden flex-col overflow-hidden rounded-4xl bg-brand-700 px-6 pt-9 text-white sm:flex sm:min-h-[32rem] sm:px-10 lg:min-h-[38rem] lg:pb-8">
+        <div className="relative isolate hidden flex-col overflow-hidden rounded-4xl bg-brand-700 px-6 pb-8 pt-9 text-white sm:flex sm:min-h-[32rem] sm:px-10 lg:min-h-[38rem]">
           <div
             aria-hidden="true"
             className="zar pointer-events-none absolute -left-20 -top-20 -z-10 size-80 rounded-full bg-brand-500/30 blur-3xl"
@@ -36,7 +28,7 @@ export function ProcNas() {
             </p>
           </div>
 
-          {/* Fotka vyplňuje spodek panelu, štítky leží nad ní */}
+          {/* Fotka vyplňuje spodek panelu */}
           <div className="relative mt-8 flex-1">
             <Foto
               src={fotky.procNasSnimek}
@@ -46,27 +38,7 @@ export function ProcNas() {
               className="absolute inset-0 rounded-3xl"
               sizes="(min-width: 1024px) 45vw, 100vw"
             />
-
-            <div className="pointer-events-none absolute inset-0 hidden lg:block">
-              {procNas.stitky.map((stitek, i) => (
-                <span
-                  key={stitek}
-                  className={`absolute ${poziceStitku[i]} whitespace-nowrap`}
-                >
-                  <Stitek text={stitek} poradi={i} />
-                </span>
-              ))}
-            </div>
           </div>
-
-          <ul className="relative z-10 mt-6 flex flex-wrap gap-2 pb-8 lg:hidden">
-            {procNas.stitky.map((stitek, i) => (
-              <li key={stitek}>
-                <Stitek text={stitek} poradi={i} />
-              </li>
-            ))}
-          </ul>
-
         </div>
 
         {/* ── Čísla ── */}

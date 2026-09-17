@@ -81,8 +81,7 @@ export function Pricing() {
             Vstupní prohlídka včetně RTG
           </h3>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-brand-100">
-            Prohlídku, snímek i umrtvení proplácí pojišťovna. Přijďte se
-            poradit, nic tím neriskujete.
+            Prohlídku, snímek i lokální anestézii proplácí pojišťovna.
           </p>
         </div>
 
@@ -107,7 +106,7 @@ export function Pricing() {
             Máme smlouvu s těmito pojišťovnami
           </h3>
           <p className="mt-2 text-sm text-ink-soft">
-            Prohlídky, RTG i umrtvení proplácí pojišťovna. Doplácíte jen tam,
+            Prohlídky, RTG i lokální anestézii proplácí pojišťovna. Doplácíte jen tam,
             kde si sami vyberete nadstandard.
           </p>
         </div>

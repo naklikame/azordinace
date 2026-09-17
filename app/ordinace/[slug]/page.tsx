@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  clenTymu,
-  klinika,
-  ordinace,
-  sluzby,
-} from "@/content/klinika";
+import { clenTymu, klinika, nazevRole, ordinace } from "@/content/klinika";
 import { Foto } from "@/components/foto";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import {
-  CheckIcon,
   HodinyIcon,
   MailIcon,
   PinIcon,
@@ -38,11 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: titulek,
-    description: o.popis,
+    description: o.perex,
     alternates: { canonical: `/ordinace/${o.id}` },
     openGraph: {
       title: `${titulek} | ${klinika.nazev}`,
-      description: o.popis,
+      description: o.perex,
       url: `/ordinace/${o.id}`,
     },
   };
@@ -57,16 +51,13 @@ export default async function OrdinacePage({ params }: Props) {
 
   const lekarka = clenTymu(o.lekarId);
   const sestra = clenTymu(o.sestraId);
-  const zamereni = o.zamereni
-    .map((id) => sluzby.find((s) => s.id === id))
-    .filter((s) => s !== undefined);
   const dalsi = ordinace.find((x) => x.id !== o.id);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
     name: `${klinika.nazev}, ${o.nazev}`,
-    description: o.popis,
+    description: o.perex,
     telephone: klinika.telefon,
     address: {
       "@type": "PostalAddress",
@@ -78,7 +69,7 @@ export default async function OrdinacePage({ params }: Props) {
     employee: [lekarka, sestra].map((c) => ({
       "@type": "Person",
       name: `${c.titul} ${c.jmeno}`.trim(),
-      jobTitle: c.specializace,
+      jobTitle: nazevRole[c.role],
     })),
   };
 
@@ -114,7 +105,7 @@ export default async function OrdinacePage({ params }: Props) {
                   {lekarka.titul} {lekarka.jmeno}
                 </h1>
                 <p className="mt-4 max-w-xl leading-relaxed text-brand-50">
-                  {o.popis}
+                  {o.perex}
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -164,8 +155,19 @@ export default async function OrdinacePage({ params }: Props) {
           </div>
         </section>
 
+        {/* ── Snímek ordinace ── */}
+        <section className="mx-auto max-w-7xl px-3 pt-8 sm:px-4 lg:px-6 lg:pt-12">
+          <Foto
+            src={o.foto}
+            alt={`${o.nazev} — ${lekarka.titul} ${lekarka.jmeno}`}
+            napoveda={`Snímek ${o.nazev}, na šířku 1600 × 1000 px`}
+            className="aspect-[16/10] w-full rounded-4xl sm:aspect-[2/1]"
+            sizes="(min-width: 1280px) 76rem, 100vw"
+          />
+        </section>
+
         {/* ── Kdo v ordinaci je ── */}
-        <section className="mx-auto max-w-7xl px-3 py-16 sm:px-4 lg:px-6 lg:py-20">
+        <section className="mx-auto max-w-7xl px-3 py-12 sm:px-4 lg:px-6 lg:py-16">
           <div className="flex items-baseline justify-between gap-4 border-b border-sand-200 pb-4">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
               Kdo se o vás postará
@@ -175,99 +177,25 @@ export default async function OrdinacePage({ params }: Props) {
             </span>
           </div>
 
+          {/* Jen jména — medailonky a specializace si klient nepřál */}
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {[lekarka, sestra].map((clen) => (
               <li
                 key={clen.id}
-                className="overflow-hidden rounded-4xl border border-sand-200 bg-white sm:flex"
+                className="flex items-center gap-4 rounded-4xl border border-sand-200 bg-white p-6 sm:p-7"
               >
-                <div className="relative sm:w-44 sm:shrink-0">
-                  <Foto
-                    src={clen.foto}
-                    alt={`${clen.titul} ${clen.jmeno}`.trim()}
-                    napoveda={`Portrét ${clen.jmeno}, 600 × 800 px`}
-                    className="aspect-[3/4] w-full sm:h-full"
-                    pozice="center top"
-                    sizes="(min-width: 640px) 11rem, 100vw"
-                  />
-                  {!clen.foto && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-4 top-4 grid size-11 place-items-center rounded-full bg-brand-700 font-display text-sm font-extrabold text-white"
-                    >
-                      {clen.iniciialy}
-                    </span>
-                  )}
-                </div>
-
-                <div className="p-7">
-                  <h3 className="font-display text-lg font-extrabold tracking-tight text-ink">
-                    {clen.titul} {clen.jmeno}
-                  </h3>
-                  <p className="mt-1.5 inline-flex rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">
-                    {clen.specializace}
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-                    {clen.bio}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* ── Zaměření ── */}
-        <section className="mx-auto max-w-7xl px-3 pb-16 sm:px-4 lg:px-6 lg:pb-20">
-          <div className="flex items-baseline justify-between gap-4 border-b border-sand-200 pb-4">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
-              Čemu se ordinace věnuje
-            </span>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
-              {zamereni.length} oborů
-            </span>
-          </div>
-
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {zamereni.map((s) => (
-              <li
-                key={s.id}
-                className="rounded-4xl border border-sand-200 bg-white p-7"
-              >
-                <h3 className="font-display text-base font-extrabold tracking-tight text-ink">
-                  {s.nazev}
+                <span
+                  aria-hidden="true"
+                  className="grid size-12 shrink-0 place-items-center rounded-full bg-brand-700 font-display text-sm font-extrabold text-white"
+                >
+                  {clen.iniciialy}
+                </span>
+                <h3 className="font-display text-lg font-extrabold tracking-tight text-ink">
+                  {clen.titul} {clen.jmeno}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                  {s.popis}
-                </p>
-                <ul className="mt-4 space-y-2 border-t border-sand-100 pt-4">
-                  {s.body.map((bod) => (
-                    <li key={bod} className="flex gap-2 text-sm text-ink-soft">
-                      <CheckIcon className="mt-0.5 size-4 shrink-0 text-brand-600" />
-                      {bod}
-                    </li>
-                  ))}
-                </ul>
               </li>
             ))}
           </ul>
-
-          <p className="mt-6 text-sm text-ink-soft">
-            Kompletní přehled najdete v{" "}
-            <Link
-              href="/#sluzby"
-              className="font-semibold text-brand-700 underline underline-offset-4"
-            >
-              seznamu služeb
-            </Link>{" "}
-            a ceny v{" "}
-            <Link
-              href="/#cenik"
-              className="font-semibold text-brand-700 underline underline-offset-4"
-            >
-              ceníku
-            </Link>
-            .
-          </p>
         </section>
 
         {/* ── Kde nás najdete + odkaz na druhou ordinaci ── */}

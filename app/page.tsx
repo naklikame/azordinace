@@ -1,6 +1,5 @@
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
-import { Manifest } from "@/components/manifest";
 import { Ordinace } from "@/components/ordinace";
 import { ProcNas } from "@/components/proc-nas";
 import { Services } from "@/components/services";
@@ -17,7 +16,6 @@ export default function Home() {
       <SiteHeader />
       <main id="obsah" className="flex-1">
         <Hero />
-        <Manifest />
         <Ordinace />
         <ProcNas />
         <Services />
