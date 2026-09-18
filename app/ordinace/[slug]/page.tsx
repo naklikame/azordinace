@@ -155,15 +155,49 @@ export default async function OrdinacePage({ params }: Props) {
           </div>
         </section>
 
-        {/* ── Snímek ordinace ── */}
-        <section className="mx-auto max-w-7xl px-3 pt-8 sm:px-4 lg:px-6 lg:pt-12">
-          <Foto
-            src={o.foto}
-            alt={`${o.nazev} — ${lekarka.titul} ${lekarka.jmeno}`}
-            napoveda={`Snímek ${o.nazev}, na šířku 1600 × 1000 px`}
-            className="aspect-[16/10] w-full rounded-4xl sm:aspect-[2/1]"
-            sizes="(min-width: 1280px) 76rem, 100vw"
-          />
+        {/* ── Fotografie ordinace ── */}
+        <section className="mx-auto max-w-7xl px-3 pt-12 sm:px-4 lg:px-6 lg:pt-16">
+          <div className="flex items-baseline justify-between gap-4 border-b border-sand-200 pb-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
+              Fotografie
+            </span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
+              {o.nazev}
+            </span>
+          </div>
+
+          {/* Na telefonu posuvný pás jako ostatní seznamy na webu — čtyři
+              fotky pod sebou by stránku natáhly na několik obrazovek. */}
+          <ul
+            className="-mx-3 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-3 bez-posuvniku sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0"
+            tabIndex={0}
+            aria-label={`Fotografie: ${o.nazev}, na telefonu posuvné do stran`}
+          >
+            {o.fotky.map((snimek, i) => (
+              <li
+                key={snimek.src}
+                className="w-[82%] max-w-xs shrink-0 snap-start sm:w-auto sm:max-w-none"
+              >
+                <figure>
+                  <Foto
+                    src={snimek.src}
+                    alt={snimek.popis}
+                    napoveda={`Snímek ${o.nazev}, na šířku 1600 × 1200 px`}
+                    className="aspect-[4/3] w-full rounded-4xl"
+                    priority={i === 0}
+                    sizes="(min-width: 1280px) 38rem, (min-width: 640px) 50vw, 82vw"
+                  />
+                  {/* Popisek jen tam, kde říká něco navíc — „Ordinace I“ pod
+                      každou fotkou Ordinace I by byl jen šum. */}
+                  {snimek.popis !== o.nazev && (
+                    <figcaption className="mt-3 text-sm font-semibold text-ink-soft">
+                      {snimek.popis}
+                    </figcaption>
+                  )}
+                </figure>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* ── Kdo v ordinaci je ── */}

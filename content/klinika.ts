@@ -40,7 +40,7 @@ export const klinika = {
     "Tramvají do zastávky Křížová nebo Braunova, do 50 m od ordinace",
     "Autobusem 231 do zastávky Ke Koulce nebo Křížová, autobusem 120 do zastávky Křížová",
     "Blízko Smíchovského nádraží i městského okruhu, dobře dostupné i ze Středočeského kraje",
-    "Parkování je možné přímo v ulici mimo rezidentní (modrou) zónu",
+    "Parkování je možné přímo v ulici",
   ],
 
   otviraciDoba: [
@@ -294,9 +294,21 @@ export type Ordinace = {
   lekarId: string;
   sestraId: string;
   perex: string;
-  /** Snímek ordinace na šířku, poměr 4:3. Prázdné = zástupný rámeček. */
-  foto: string;
+  /**
+   * Snímky na šířku, poměr 4:3. První slouží jako náhled v přehledu
+   * ordinací, podstránka ukazuje všechny.
+   */
+  fotky: Snimek[];
 };
+
+export type Snimek = {
+  src: string;
+  /** Popisek pod snímkem a zároveň alternativní text. */
+  popis: string;
+};
+
+/** Čekárna je společná, klient ji chtěl u obou ordinací. */
+const cekarna: Snimek = { src: "/fotky/cekarna.jpg", popis: "Čekárna" };
 
 /**
  * ⚠️ K OVĚŘENÍ U KLIENTA
@@ -307,10 +319,10 @@ export type Ordinace = {
  * Nepotvrzené je zatím také:
  *  - zda obě ordinace sídlí na stejné adrese (texty proto o adrese mlčí
  *    a podstránky zobrazují adresu kliniky),
- *  - zda mají shodnou otevírací dobu (teď sdílejí dobu celé kliniky),
- *  - které snímky patří ke které ordinaci. Fotky pocházejí z galerie na
- *    původním webu a jsou to prokazatelně dvě různé místnosti, ale že první
- *    je Ordinace I a druhá Ordinace II, je jen domněnka.
+ *  - zda mají shodnou otevírací dobu (teď sdílejí dobu celé kliniky).
+ *
+ * Fotky už klient přiřadil sám: růžové křeslo je Ordinace I (snímky
+ * z galerie původního webu), modré Ordinace II (poslal je zvlášť).
  */
 export const ordinace: Ordinace[] = [
   {
@@ -320,7 +332,14 @@ export const ordinace: Ordinace[] = [
     lekarId: "navratilova",
     sestraId: "babadzanjan",
     perex: "Komplexní péče o dospělé i děti",
-    foto: "/fotky/ordinace-1.jpg",
+    // Úvodní snímek z hero sekce není první, ať se na stránce neopakuje
+    // hned dvakrát pod sebou.
+    fotky: [
+      { src: "/fotky/ordinace-1-a.jpg", popis: "Ordinace I" },
+      { src: "/fotky/ordinace-hero.jpg", popis: "Ordinace I" },
+      { src: "/fotky/ordinace-1-b.jpg", popis: "Ordinace I" },
+      cekarna,
+    ],
   },
   {
     id: "ordinace-2",
@@ -329,7 +348,12 @@ export const ordinace: Ordinace[] = [
     lekarId: "housova",
     sestraId: "babadzanjan",
     perex: "Komplexní péče o dospělé i děti",
-    foto: "/fotky/ordinace-2.jpg",
+    fotky: [
+      { src: "/fotky/ordinace-2-a.jpg", popis: "Ordinace II" },
+      { src: "/fotky/ordinace-2-b.jpg", popis: "Ordinace II" },
+      { src: "/fotky/ordinace-2-c.jpg", popis: "Ordinace II" },
+      cekarna,
+    ],
   },
 ];
 
@@ -434,7 +458,7 @@ export const faq: FaqPolozka[] = [
   {
     otazka: "Jak se k vám dostanu?",
     odpoved:
-      "Najdete nás na adrese Ke Koulce 1704/6, Praha 5 – Smíchov. Od metra B Anděl je to pět minut pěšky, zastávky tramvají Křížová a Braunova i autobusů 231 a 120 máte do padesáti metrů. Parkování možné přímo v ulici.",
+      "Najdete nás na adrese Ke Koulce 1704/6, Praha 5 – Smíchov. Od metra B Anděl je to pět minut pěšky, zastávky tramvají Křížová a Braunova i autobusů 231 a 120 máte do padesáti metrů. Parkování je možné přímo v ulici.",
   },
   {
     otazka: "Kdy ordinujete?",

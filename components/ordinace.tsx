@@ -44,9 +44,10 @@ export function Ordinace() {
                 href={`/ordinace/${o.id}`}
                 className="zdvih group row-span-4 grid grid-rows-subgrid gap-y-0 overflow-hidden rounded-4xl border border-sand-200 bg-white hover:border-brand-300 sm:gap-y-4"
               >
+                {/* Náhled je první snímek z galerie, zbytek je na podstránce */}
                 <Foto
-                  src={o.foto}
-                  alt={`${o.nazev} — ${lekarka.titul} ${lekarka.jmeno}`}
+                  src={o.fotky[0]?.src ?? ""}
+                  alt={o.fotky[0]?.popis ?? o.nazev}
                   napoveda={`Snímek ${o.nazev}, na šířku 1200 × 900 px`}
                   className="aspect-[4/3] w-full"
                   sizes="(min-width: 1024px) 40vw, (min-width: 640px) 90vw, 82vw"
