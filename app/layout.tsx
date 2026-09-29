@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Archivo } from "next/font/google";
-import { klinika, otviraciDobaSchema, sluzby } from "@/content/klinika";
+import { klinika, nazevRole, otviraciDobaSchema, sluzby, tym } from "@/content/klinika";
+import { StrukturovanaData } from "@/components/strukturovana-data";
 import { Ornament } from "@/components/ornament";
 import "./globals.css";
 
@@ -18,12 +19,12 @@ const archivo = Archivo({
   display: "swap",
 });
 
-const url = "https://www.zubniordinace-az.cz";
+const url = klinika.web;
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),
   title: {
-    default: `${klinika.nazev} | ${klinika.podtitul}`,
+    default: `${klinika.nazev} | Zubař ${klinika.podtitul}`,
     template: `%s | ${klinika.nazev}`,
   },
   description: klinika.perex,
@@ -67,15 +68,23 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-/** Strukturovaná data pro lokální vyhledávání a mapy. */
-const jsonLd = {
-  "@context": "https://schema.org",
+/**
+ * Strukturovaná data pro lokální vyhledávání a mapy. Uzly jsou v jednom
+ * grafu a ordinace má vlastní `@id`, takže se na ni podstránky odkazují
+ * místo toho, aby stejnou firmu na stejné adrese popisovaly znovu.
+ */
+const klinikaLd = {
   "@type": "Dentist",
   "@id": `${url}/#klinika`,
   name: klinika.nazev,
   description: klinika.perex,
   url,
-  image: `${url}/opengraph-image`,
+  image: [
+    `${url}/opengraph-image`,
+    `${url}/fotky/ordinace-hero.jpg`,
+    `${url}/fotky/ordinace-2-a.jpg`,
+    `${url}/fotky/cekarna.jpg`,
+  ],
   telephone: klinika.telefon,
   email: klinika.email,
   priceRange: "$$",
@@ -105,13 +114,36 @@ const jsonLd = {
     longitude: klinika.mapa.lng,
   },
   openingHoursSpecification: otviraciDobaSchema,
-  // Hodnocení sem doplňte, teprve až budete mít doložitelný průměr a počet
-  // recenzí. Vymyšlený aggregateRating je porušení pravidel Googlu.
+  employee: tym.map((c) => ({
+    "@type": "Person",
+    name: `${c.titul} ${c.jmeno}`.trim(),
+    jobTitle: nazevRole[c.role],
+  })),
+  // Prázdné `sameAs` do výstupu nepatří, proto se přidá až s prvním profilem.
+  ...(klinika.profily.length > 0 ? { sameAs: klinika.profily } : {}),
+  // `aggregateRating` sem nepatří: hvězdičky z firemního profilu Google
+  // nesmíme značkovat na vlastním webu. Doplnit lze jen doložitelný průměr
+  // z recenzí, které ordinace sbírá sama.
   parentOrganization: {
     "@type": "Organization",
     name: klinika.provozovatel,
     identifier: klinika.ico,
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${url}/#web`,
+      url,
+      name: klinika.nazev,
+      inLanguage: "cs-CZ",
+      publisher: { "@id": `${url}/#klinika` },
+    },
+    klinikaLd,
+  ],
 };
 
 export default function RootLayout({
@@ -126,10 +158,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <Ornament />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <StrukturovanaData data={jsonLd} />
         {children}
       </body>
     </html>

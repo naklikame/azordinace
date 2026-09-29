@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { clenTymu, klinika, nazevRole, ordinace } from "@/content/klinika";
+import { clenTymu, klinika, ordinace } from "@/content/klinika";
+import {
+  drobecky,
+  IDENTITA_KLINIKY,
+  StrukturovanaData,
+} from "@/components/strukturovana-data";
 import { Foto } from "@/components/foto";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -53,24 +58,25 @@ export default async function OrdinacePage({ params }: Props) {
   const sestra = clenTymu(o.sestraId);
   const dalsi = ordinace.find((x) => x.id !== o.id);
 
+  // Obě ordinace sídlí na jedné adrese pod jedním telefonem. Druhá firemní
+  // entita se stejnými údaji by lokálnímu vyhledávání spíš uškodila, proto
+  // se podstránka jen odkáže na ordinaci popsanou v hlavičce webu.
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    name: `${klinika.nazev}, ${o.nazev}`,
-    description: o.perex,
-    telephone: klinika.telefon,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: klinika.adresa.ulice,
-      addressLocality: klinika.adresa.mesto,
-      postalCode: klinika.adresa.psc,
-      addressCountry: "CZ",
-    },
-    employee: [lekarka, sestra].map((c) => ({
-      "@type": "Person",
-      name: `${c.titul} ${c.jmeno}`.trim(),
-      jobTitle: nazevRole[c.role],
-    })),
+    "@graph": [
+      drobecky([{ nazev: o.nazev, cesta: `/ordinace/${o.id}` }]),
+      {
+        "@type": "WebPage",
+        "@id": `${klinika.web}/ordinace/${o.id}`,
+        name: `${o.nazev} — ${lekarka.titul} ${lekarka.jmeno}`,
+        description: o.perex,
+        inLanguage: "cs-CZ",
+        about: { "@id": IDENTITA_KLINIKY },
+        primaryImageOfPage: o.fotky[0]
+          ? `${klinika.web}${o.fotky[0].src}`
+          : undefined,
+      },
+    ],
   };
 
   return (
@@ -78,10 +84,7 @@ export default async function OrdinacePage({ params }: Props) {
       <SiteHeader />
 
       <main id="obsah" className="flex-1">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <StrukturovanaData data={jsonLd} />
 
         <div className="mx-auto max-w-7xl px-3 pt-8 sm:px-4 lg:px-6">
           <Link

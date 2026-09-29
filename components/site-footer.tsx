@@ -1,4 +1,5 @@
 import { klinika, navigace, sluzby } from "@/content/klinika";
+import { pravniDokumenty } from "@/content/pravni";
 import { SipkaIcon } from "@/components/icons";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
@@ -130,12 +131,29 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="relative flex flex-col gap-3 border-t border-white/10 py-8 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
-          <p className="tabular-nums">
-            © {rok} {klinika.nazev}. Provozuje {klinika.provozovatel}, IČO{" "}
-            {klinika.ico}.
-          </p>
-          <p>{klinika.sidlo}</p>
+        <div className="relative border-t border-white/10 py-8 text-sm text-white/50">
+          <nav aria-label="Právní informace">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+              {pravniDokumenty.map((d) => (
+                <li key={d.slug}>
+                  <Link
+                    href={`/${d.slug}`}
+                    className="underline-offset-4 transition-colors hover:text-white hover:underline"
+                  >
+                    {d.nazev}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="tabular-nums">
+              © {rok} {klinika.nazev}. Provozuje {klinika.provozovatel}, IČO{" "}
+              {klinika.ico}.
+            </p>
+            <p>{klinika.sidlo}</p>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
-import { ordinace } from "@/content/klinika";
+import { klinika, ordinace } from "@/content/klinika";
+import { pravniDokumenty } from "@/content/pravni";
 
-const url = "https://www.zubniordinace-az.cz";
+const url = klinika.web;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -16,6 +17,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    // Právní texty se mění zřídka a nejsou cílem hledání, ale patří do
+    // indexu — vyhledávače je berou jako známku důvěryhodnosti webu.
+    ...pravniDokumenty.map((d) => ({
+      url: `${url}/${d.slug}`,
+      lastModified: new Date(d.aktualizovano),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
     })),
   ];
 }

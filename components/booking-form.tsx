@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useEffect, useRef } from "react";
 import { useFormStatus } from "react-dom";
 import { odeslatObjednavku, type StavObjednavky } from "@/app/actions";
@@ -227,7 +228,14 @@ export function BookingForm() {
           />
           <label htmlFor="souhlas" className="text-sm leading-relaxed text-ink-soft">
             Souhlasím se zpracováním osobních údajů za účelem vyřízení
-            objednávky. <span aria-hidden="true">*</span>
+            objednávky. Podrobnosti najdete v{" "}
+            <Link
+              href="/ochrana-osobnich-udaju"
+              className="font-semibold text-brand-700 underline underline-offset-4"
+            >
+              zásadách ochrany osobních údajů
+            </Link>
+            . <span aria-hidden="true">*</span>
           </label>
         </div>
         <Chyba id="souhlas-chyba" text={chyby.souhlas} />

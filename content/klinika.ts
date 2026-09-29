@@ -27,7 +27,7 @@ export const klinika = {
   telefon: "+420 774 597 161",
   telefonPevny: "+420 251 553 401",
   email: "info@zubniordinace-az.cz",
-  web: "https://www.zubniordinace-az.cz",
+  web: "https://zubniordinace-az.cz",
 
   /** Ověřeno geokódováním adresy Ke Koulce 1704/6. */
   mapa: {
@@ -54,6 +54,21 @@ export const klinika = {
   ],
 
   pojistovny: ["VZP 111", "ZP MV ČR 211", "OZP 207", "VoZP 201", "RBP 213"],
+
+  /**
+   * Odkazy na ověřené profily ordinace — firemní profil Google, sociální
+   * sítě, katalogy. Propíšou se do strukturovaných dat jako `sameAs`, čímž
+   * vyhledávači řeknou, že web a profil jsou tatáž firma. Pro lokální
+   * vyhledávání je to největší páka, kterou lze ovlivnit z webu.
+   *
+   * ⚠️ Ordinace firemní profil Google má (k 9/2026 kolem 19 recenzí), ale
+   * nikde na webu na něj neodkazuje. Doplňte sem jeho adresu.
+   *
+   * Pozor: hodnocení z Googlu se NESMÍ přepisovat do `aggregateRating` na
+   * vlastním webu. Google značkování cizích recenzí zakazuje a hvězdičky
+   * z vlastního profilu ve výsledcích stejně nezobrazí.
+   */
+  profily: [] as string[],
 
 } as const;
 
