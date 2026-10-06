@@ -1,5 +1,3 @@
-"use server";
-
 export type StavObjednavky = {
   stav: "necinny" | "uspech" | "chyba";
   zprava?: string;
@@ -9,6 +7,16 @@ export type StavObjednavky = {
 const TELEFON = /^(\+?\d{1,3}[\s-]?)?(\d[\s-]?){9,12}$/;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+/**
+ * Přístupový klíč z Web3Forms. Je veřejný (posílá se z prohlížeče), určuje jen,
+ * na který e-mail zpráva dorazí — proto NEXT_PUBLIC_.
+ */
+const WEB3FORMS_KLIC = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+
+/**
+ * Odesílá se z prohlížeče, ne přes server action — Web3Forms na free plánu
+ * požadavky ze serveru blokuje.
+ */
 export async function odeslatObjednavku(
   _predchozi: StavObjednavky,
   formData: FormData,
@@ -55,9 +63,49 @@ export async function odeslatObjednavku(
     };
   }
 
-  // TODO: Napojení na reálný kanál — odeslání e-mailu recepci (Resend, SMTP)
-  // nebo zápis do rezervačního systému. Data jsou zvalidovaná a připravená:
-  void { jmeno, telefon, email, sluzba, termin, zprava };
+  const selhani: StavObjednavky = {
+    stav: "chyba",
+    zprava:
+      "Objednávku se nepodařilo odeslat. Zkuste to prosím znovu, nebo nám zavolejte.",
+  };
+
+  if (!WEB3FORMS_KLIC) {
+    console.error("Chybí NEXT_PUBLIC_WEB3FORMS_KEY, formulář nemá kam odeslat.");
+    return selhani;
+  }
+
+  const terminCesky = termin
+    ? new Date(termin).toLocaleDateString("cs-CZ")
+    : "neuveden";
+
+  try {
+    const odpoved = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KLIC,
+        subject: `Nová objednávka z webu: ${jmeno}`,
+        from_name: "Web Zubní ordinace AZ",
+        // Odpověď na e-mail z formuláře půjde rovnou pacientovi.
+        replyto: email,
+        // Honeypot proti botům — skryté pole, člověk ho nevyplní.
+        botcheck: formData.get("botcheck") ? true : "",
+        "Jméno": jmeno,
+        Telefon: telefon,
+        "E-mail": email,
+        "Ošetření": sluzba,
+        "Preferovaný termín": terminCesky,
+        "Zpráva": zprava || "—",
+      }),
+    });
+    const data = (await odpoved.json()) as { success?: boolean };
+    if (!odpoved.ok || !data.success) return selhani;
+  } catch {
+    return selhani;
+  }
 
   return {
     stav: "uspech",

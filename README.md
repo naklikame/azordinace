@@ -32,7 +32,7 @@ Barvy a typografii najdete v `@theme` bloku v [app/globals.css](app/globals.css)
 app/
   layout.tsx          metadata, JSON-LD (Dentist), fonty
   page.tsx            složení sekcí
-  actions.ts          server action objednávkového formuláře
+lib/objednavka.ts     validace a odeslání formuláře na Web3Forms
   opengraph-image.tsx generovaný náhled pro sdílení na sítích
   sitemap.ts robots.ts
 components/           jednotlivé sekce webu

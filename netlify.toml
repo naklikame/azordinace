@@ -1,7 +1,8 @@
 # Nasazení na Netlify z větve main.
 #
-# Web běží v serverovém režimu Nextu, ne jako statický export — objednávkový
-# formulář používá server action a podstránky ordinací mají vlastní metadata.
+# Web běží v serverovém režimu Nextu, ne jako statický export —
+# podstránky ordinací mají vlastní metadata. Formulář odesílá z prohlížeče
+# na Web3Forms, klíč je v proměnné NEXT_PUBLIC_WEB3FORMS_KEY.
 # O převod na funkce se stará runtime pro Next.js, který Netlify doplní sám.
 
 [build]

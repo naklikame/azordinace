@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState, useEffect, useRef } from "react";
 import { useFormStatus } from "react-dom";
-import { odeslatObjednavku, type StavObjednavky } from "@/app/actions";
+import { odeslatObjednavku, type StavObjednavky } from "@/lib/objednavka";
 import { sluzby } from "@/content/klinika";
 import { CheckIcon } from "@/components/icons";
 
@@ -240,6 +240,16 @@ export function BookingForm() {
         </div>
         <Chyba id="souhlas-chyba" text={chyby.souhlas} />
       </div>
+
+      {/* Honeypot pro Web3Forms — lidé ho nevidí, boti ho vyplní. */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
 
       <Odeslat />
 
