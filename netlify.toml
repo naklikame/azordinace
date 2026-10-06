@@ -16,7 +16,8 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Bezpečnostní hlavičky. Web nenačítá nic zvenčí kromě mapy z OpenStreetMap.
+# Bezpečnostní hlavičky. Web nenačítá nic zvenčí kromě mapy z OpenStreetMap;
+# formulář posílá data na api.web3forms.com.
 [[headers]]
   for = "/*"
   [headers.values]

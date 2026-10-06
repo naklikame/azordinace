@@ -8,9 +8,9 @@
  * se zkušeností se zdravotnickými poskytovateli. Zvlášť u zdravotnické
  * dokumentace jde o zvláštní kategorii údajů podle čl. 9 GDPR.
  *
- * ⚠️ K OVĚŘENÍ U KLIENTA (v textech označeno jako [DOPLNIT])
- *  - kdo je zpracovatelem e-mailu a hostingu a zda má uzavřenou
- *    zpracovatelskou smlouvu,
+ * ⚠️ K OVĚŘENÍ U KLIENTA
+ *  - zda jsou se zpracovateli (Netlify, Web3Forms, WEDOS) přijaté
+ *    zpracovatelské podmínky — u všech tří platí odsouhlasením služby,
  *  - zda ordinace jmenovala pověřence pro ochranu osobních údajů,
  *  - konkrétní doby uchování zdravotnické dokumentace podle druhu záznamu,
  *  - zda se pořizují fotografie pacientů a na jakém základě.
@@ -58,7 +58,7 @@ export const ochranaUdaju: PravniDokument = {
   nazev: "Ochrana osobních údajů",
   popis:
     "Jaké osobní údaje Zubní ordinace AZ zpracovává, proč, jak dlouho a jaká máte práva.",
-  aktualizovano: "2026-09-29",
+  aktualizovano: "2026-10-06",
   perex:
     "Zpracováváme osobní údaje pacientů i lidí, kteří se na nás obrátí přes web. Níž je popsané, o jaké údaje jde, proč je potřebujeme, jak dlouho je držíme a co s nimi můžete udělat.",
   sekce: [
@@ -75,7 +75,7 @@ export const ochranaUdaju: PravniDokument = {
         },
         {
           typ: "odstavec",
-          text: "Pověřence pro ochranu osobních údajů jsme nejmenovali. [DOPLNIT: ověřit — povinnost vzniká mimo jiné při rozsáhlém zpracování zvláštních kategorií údajů; u ordinace této velikosti se zpravidla neuplatní, ale je potřeba to potvrdit.]",
+          text: "Pověřence pro ochranu osobních údajů jsme nejmenovali. Povinnost jmenovat ho vzniká mimo jiné při rozsáhlém zpracování údajů o zdravotním stavu, což u jedné ordinace naší velikosti nenastává.",
         },
       ],
     },
@@ -91,7 +91,7 @@ export const ochranaUdaju: PravniDokument = {
                 "Jméno, datum narození, rodné číslo, kontaktní údaje, zdravotní pojišťovna a údaje o zdravotním stavu vedené ve zdravotnické dokumentaci.",
               titul:
                 "Čl. 9 odst. 2 písm. h) GDPR — zpracování je nezbytné pro poskytování zdravotní péče. Povinnost vést dokumentaci ukládá zákon č. 372/2011 Sb., o zdravotních službách.",
-              doba: "Po dobu stanovenou vyhláškou č. 98/2012 Sb., o zdravotnické dokumentaci. [DOPLNIT: konkrétní lhůty podle druhu záznamu.]",
+              doba: "Po dobu, kterou pro jednotlivé druhy záznamů stanoví vyhláška č. 98/2012 Sb., o zdravotnické dokumentaci. Konkrétní lhůtu pro vaši dokumentaci vám na požádání sdělíme.",
             },
             {
               ucel: "Vyřízení objednávky z formuláře na webu",
@@ -99,7 +99,7 @@ export const ochranaUdaju: PravniDokument = {
                 "Jméno a příjmení, telefon, e-mail, zvolené ošetření, případný preferovaný termín a text zprávy.",
               titul:
                 "Čl. 6 odst. 1 písm. b) GDPR — kroky učiněné před uzavřením smlouvy na vaši žádost. Souhlas ve formuláři slouží k potvrzení, že jste s tímto zpracováním srozuměni.",
-              doba: "Do vyřízení objednávky a domluvení termínu. Pokud se nestanete pacientem, údaje z formuláře smažeme nejpozději do 6 měsíců.",
+              doba: "Do vyřízení objednávky a domluvení termínu. Pokud se nestanete pacientem, údaje z formuláře smažeme nejpozději do 6 měsíců. Kopii odeslaného formuláře uchovává i služba Web3Forms, která ji automaticky maže nejpozději po 3 letech.",
             },
             {
               ucel: "Telefonická a e-mailová komunikace",
@@ -136,13 +136,13 @@ export const ochranaUdaju: PravniDokument = {
           polozky: [
             "Zdravotním pojišťovnám, se kterými máme smlouvu (VZP 111, ZP MV ČR 211, OZP 207, VoZP 201, RBP 213), a to v rozsahu nutném k vykázání a úhradě péče.",
             "Jiným poskytovatelům zdravotních služeb, pokud vás k nim odesíláme nebo pokud si vyžádají dokumentaci v souladu se zákonem.",
-            "Zpracovatelům, kteří pro nás zajišťují provoz webu a e-mailu. [DOPLNIT: konkrétní poskytovatel hostingu a e-mailové schránky a potvrzení, že je s nimi uzavřena zpracovatelská smlouva podle čl. 28 GDPR.]",
+            "Zpracovatelům, kteří pro nás zajišťují provoz webu a e-mailu, a to na základě zpracovatelských podmínek podle čl. 28 GDPR: Netlify, Inc. (USA) — hosting webu; Web3Creative, provozovatel služby Web3Forms (Indie) — příjem objednávek z formuláře a jejich doručení do naší e-mailové schránky; WEDOS Internet, a.s. (Česká republika) — e-mailová schránka ordinace.",
             "Orgánům veřejné moci, pokud nám to ukládá zákon (například Státnímu ústavu pro kontrolu léčiv, krajskému úřadu nebo soudu).",
           ],
         },
         {
           typ: "odstavec",
-          text: "Web je provozovaný na serverech poskytovatele hostingu. [DOPLNIT: uvést, zda dochází k předání do země mimo EU, a pokud ano, na jakém základě — například standardní smluvní doložky nebo rozhodnutí o odpovídající ochraně.]",
+          text: "Část údajů se tak dostává mimo Evropskou unii. Netlify je certifikované v rámci EU-U.S. Data Privacy Framework, pro který Evropská komise vydala rozhodnutí o odpovídající ochraně. Předání společnosti Web3Creative, která sídlí v Indii a využívá i servery v USA, je zajištěno standardními smluvními doložkami schválenými Evropskou komisí, které jsou součástí jejích zpracovatelských podmínek. E-mailová schránka u společnosti WEDOS je umístěná v České republice.",
         },
       ],
     },
@@ -160,6 +160,10 @@ export const ochranaUdaju: PravniDokument = {
         {
           typ: "odstavec",
           text: "Poskytovatel hostingu vede provozní záznamy o přístupech (IP adresa, čas, adresa stránky), které slouží k zajištění bezpečnosti a provozu. Náš oprávněný zájem podle čl. 6 odst. 1 písm. f) GDPR.",
+        },
+        {
+          typ: "odstavec",
+          text: "Objednávkový formulář odesílá vyplněné údaje přímo z vašeho prohlížeče službě Web3Forms, která nám je doručí e-mailem. Spolu s nimi se jí předá i vaše IP adresa, kterou Web3Forms a jeho subdodavatelé používají k ochraně před spamem a zneužitím formuláře. Dokud formulář neodešlete, nic se nepřenáší.",
         },
       ],
     },
@@ -221,7 +225,7 @@ export const cookies: PravniDokument = {
   nazev: "Cookies",
   popis:
     "Tento web nepoužívá cookies ani jiná úložiště v prohlížeči. Proto tu nenajdete lištu se souhlasem.",
-  aktualizovano: "2026-09-29",
+  aktualizovano: "2026-10-06",
   perex:
     "Krátce: tento web neukládá do vašeho prohlížeče nic. Žádné cookies, žádnou analytiku, žádné reklamní skripty. Proto tu není lišta, která by po vás chtěla souhlas.",
   sekce: [
@@ -252,11 +256,12 @@ export const cookies: PravniDokument = {
       bloky: [
         {
           typ: "odstavec",
-          text: "Jedna věc na webu pochází z cizího serveru — mapa v sekci Kontakt.",
+          text: "Dvě věci na webu se spojují s cizím serverem — mapa v sekci Kontakt a odeslání objednávkového formuláře.",
         },
         {
           typ: "seznam",
           polozky: [
+            "Objednávkový formulář: po kliknutí na Odeslat se vyplněné údaje a vaše IP adresa pošlou službě Web3Forms, která nám objednávku doručí e-mailem. Dokud formulář neodešlete, s Web3Forms se nespojujete. Žádné cookies nenastavuje.",
             "Mapa OpenStreetMap: při jejím zobrazení se na servery OpenStreetMap Foundation přenese vaše IP adresa a údaje o prohlížeči. Bez toho se mapa nenačte. Cookies pro sledování přitom nenastavuje.",
             "Písma: stahují se přímo z našeho webu, ne od Googlu. Při načtení stránky se tedy s žádným dalším serverem nespojujete.",
             "Fotografie a ostatní soubory: všechny jsou uložené u nás.",
